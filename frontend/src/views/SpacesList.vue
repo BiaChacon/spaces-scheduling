@@ -1,7 +1,7 @@
 <template>
   <div>
     <p>Lista de espaços</p>
-    {{spaces}}
+    <b-table striped hover :items="spaces"></b-table>
   </div>
 </template>
 <script>
