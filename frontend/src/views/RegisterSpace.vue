@@ -1,35 +1,35 @@
 <template>
   <div>
     <b-form @submit="onSubmit" @reset="onReset" v-if="show">
-      <b-form-group id="input-group-2" label="Nome" label-for="input-2">
+      <b-form-group id="input-group-2" label="Nome:" label-for="input-2">
         <b-form-input
           v-model="form.name"
           required
-          placeholder="Enter name"
+          placeholder="Nome"
         ></b-form-input>
       </b-form-group>
 
-      <b-form-group id="input-group-2" label="Descrição" label-for="input-2">
+      <b-form-group id="input-group-2" label="Descrição:" label-for="input-2">
         <b-form-input
           v-model="form.description"
           required
-          placeholder="Enter description"
+          placeholder="Descrição"
         ></b-form-input>
       </b-form-group>
 
-      <b-form-group id="input-group-2" label="Localização" label-for="input-2">
+      <b-form-group id="input-group-2" label="Localização:" label-for="input-2">
         <b-form-input
           v-model="form.localization"
           required
-          placeholder="Enter localization"
+          placeholder="Localização"
         ></b-form-input>
       </b-form-group>
 
-      <b-form-group id="input-group-2" label="Responsável" label-for="input-2">
+      <b-form-group id="input-group-2" label="Responsável:" label-for="input-2">
         <b-form-input
           v-model="form.responsible"
           required
-          placeholder="Enter responsible"
+          placeholder="Responsável"
         ></b-form-input>
       </b-form-group>
 
@@ -41,11 +41,11 @@
         ></b-form-select>
       </b-form-group>
 
-      <b-form-group id="input-group-2" label="Justificativa" label-for="input-2">
+      <b-form-group id="input-group-2" label="Justificativa:" label-for="input-2">
         <b-form-input
           v-model="form.justification"
           required
-          placeholder="Enter justification"
+          placeholder="Justificativa"
         ></b-form-input>
       </b-form-group>
 
@@ -57,33 +57,35 @@
         ></b-form-select>
       </b-form-group>
       
-      <b-form-group id="input-group-2" label="Capacidade" label-for="input-2">
+      <b-form-group id="input-group-2" label="Capacidade:" label-for="input-2">
         <b-form-input
           v-model="form.qtdPeople"
           required
-          placeholder="Enter qtdPeople"
+          placeholder="Capacidade"
           type="number"
         ></b-form-input>
       </b-form-group>
       
-      <b-form-group id="input-group-2" label="Ramal" label-for="input-2">
+      <b-form-group id="input-group-2" label="Ramal:" label-for="input-2">
         <b-form-input
           id="input-2"
           v-model="form.extension"
           required
-          placeholder="Enter ramal"
+          placeholder="Ramal"
           type="number"
         ></b-form-input>
       </b-form-group>
 
-      <b-button type="submit" variant="primary">Submit</b-button>
-      <b-button type="reset" variant="danger">Reset</b-button>
+      <b-button type="submit" variant="primary">Cadastrar</b-button>
+      <b-button type="reset" variant="danger">Cancelar</b-button>
     </b-form>
  
   </div>
 </template>
 
 <script>
+import axios from "axios";
+
   export default {
     data() {
       return {
@@ -107,7 +109,9 @@
     methods: {
       onSubmit(evt) {
         evt.preventDefault()
-        alert(JSON.stringify(this.form))
+        axios.post('http://localhost:3333/spaces',this.form)
+        alert('Espaço salvo')
+        this.$router.push("/");
       },
       onReset(evt) {
         evt.preventDefault()
@@ -116,10 +120,10 @@
         this.form.description = "",
         this.form.localization = "",
         this.form.responsible = "",
-        this.form.special = false,
+        this.form.special = null,
         this.form.justification = "",
         this.form.disabled = false,
-        this.form.computers = false,
+        this.form.computers = null,
         this.form.qtdPeople = "",
         this.form.extension = "",
         // Trick to reset/clear native browser form validation state
