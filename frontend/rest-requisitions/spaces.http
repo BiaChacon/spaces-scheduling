@@ -6,7 +6,7 @@ POST http://localhost:3333/spaces HTTP/1.1
 content-type: application/json
 
 {
-    "name": "Lab 6",
+    "name": "Lab 5",
     "description": "pipipi popopo",
     "localization": "predio informatica",
     "responsible": "Luiz",

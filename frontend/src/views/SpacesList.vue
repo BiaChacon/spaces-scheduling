@@ -1,7 +1,7 @@
 <template>
   <div>
     <p>Lista de espaços</p>
-    <b-table striped hover :items="spaces"></b-table>
+    <b-table striped hover :items="spaces" :fields="fields" :fixed=true></b-table>
   </div>
 </template>
 <script>
@@ -9,7 +9,14 @@ import axios from "axios";
 
 export default {
   data: () => ({
-    spaces: []
+    spaces: [],
+    fields : [
+      { key: 'name', label: 'Nome', sortable: true },
+      { key: 'qtdPeople', label: 'Capacidade', sortable: true },
+      { key: 'description', label: 'Descrição' },
+      { key: 'localization', label: 'Localização' },
+      { key: 'description', label: 'Responsavel' }
+    ]
   }),
   async created() {
     // GET request using axios with async/await
