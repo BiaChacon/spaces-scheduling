@@ -23,7 +23,8 @@ module.exports = {
     
         const id = generateUniqueId();
         
-        await connection('spaces').insert({
+        if(!disabled){
+           await connection('spaces').insert({
             id,
             name,
             description,
@@ -38,5 +39,8 @@ module.exports = {
         });
         
         return response.json({ id });    
+        }
+        response.status(400).send('Bad request!');
+         
     }    
 };
