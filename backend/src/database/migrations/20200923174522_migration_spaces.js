@@ -2,16 +2,16 @@
 exports.up = function(knex) {
   return knex.schema.createTable('spaces', function (table) {
       table.string('id').primary();   
-      table.string('name').primary(); 
-      table.string('description').primary(); 
-      table.string('localization').primary(); 
-      table.string('responsible').primary(); 
-      table.boolean('special').primary(); 
-      table.string('justification').primary(); 
-      table.boolean('disabled').primary(); 
-      table.boolean('computers').primary(); 
-      table.integer('qtdPeople').primary(); 
-      table.integer('extension').primary(); 
+      table.string('name'); 
+      table.string('description'); 
+      table.string('localization'); 
+      table.string('responsible');
+      table.boolean('special'); 
+      table.string('justification'); 
+      table.boolean('disabled'); 
+      table.boolean('computers'); 
+      table.integer('qtdPeople'); 
+      table.integer('extension'); 
   });
 };
 
