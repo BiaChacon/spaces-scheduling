@@ -20,8 +20,16 @@ module.exports = {
     } = request.body;
 
     const id = generateUniqueId();
-    
-    const available = availabilityCheck(normal,dateStart,dateEnd,schedule);
+
+    //validate space
+    const space = await connection('spaces').select('*').where('id', spaceId);
+    if(space.length==0)
+      return response.status(400).send('Bad request! Space does not exist!');
+      
+    //get reservations for a space
+    const reservations = await connection('reservations').select('*').where('spaceId', spaceId);
+    //check if the date and time are available for a given space
+    const available=availabilityCheck(normal,dateStart,dateEnd,schedule,reservations);
 
     if(available){
       await connection('reservations').insert({
