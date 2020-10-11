@@ -28,8 +28,8 @@ routes.get('/reservations', ReservationController.index);
 routes.post('/register-reservation', celebrate({
     [Segments.BODY]: Joi.object().keys({
         normal: Joi.boolean().required(),
-        dateStart: Joi.date().required(),
-        dateEnd: Joi.date().required(),
+        dateStart: Joi.string().required(),
+        dateEnd: Joi.string().required(),
         justification: Joi.string().required(),
         schedule: Joi.string().required(),
         canceled: Joi.boolean().required(),
