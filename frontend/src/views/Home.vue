@@ -1,6 +1,8 @@
 <template>
   <div class="home">
-    welcome to ...
+    <!-- <v-card-text> -->
+      welcome to ...
+    <!-- </v-card-text>  -->
   </div>
 </template>
 
