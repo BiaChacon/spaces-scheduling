@@ -1,0 +1,19 @@
+### Post requisition for reservation
+
+POST http://localhost:3333/register-reservation HTTP/1.1
+content-type: application/json
+
+{
+    "normal": false,
+    "dateStart": "2020-10-12",
+    "dateEnd": "2020-11-11",
+    "justification": "eu quero a sala dia 12",
+    "schedule": "ninguem",
+    "canceled": false,
+    "spaceId": "5d35a16f"
+}
+
+###
+
+GET http://localhost:3333/reservations HTTP/1.1
+content-type: application/json
