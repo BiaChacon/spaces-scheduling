@@ -31,6 +31,11 @@ module.exports = {
       var data2 = new Date(dateEnd);
       if(data1>=data2)
         return response.status(400).send('Bad request! The end date of the recurring reservation must be after the start date!');
+    }else{
+      var data1 = new Date(dateStart);
+      var data2 = new Date(dateEnd);
+      if(data1!==data2)
+        return response.status(400).send('Bad request! The end date of the recurring reservation must be after the start date!');
     }
     //get reservations for a space
     const reservations = await connection('reservations').select('*').where('spaceId', spaceId);
