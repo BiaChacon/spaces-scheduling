@@ -27,25 +27,23 @@
         <v-list nav dense>
           <v-list-item-group
             v-model="group"
-            active-class="deep-purple--text text--accent-4"
+            active-class="darken-3--text text--accent-4"
           >
-            <v-list-item>
-        <!-- <router-link to="/cadastrar-espaco">Cadastrar Espaço</router-link> |
-        -->
+            <v-list-item :to="{path: '/'}">
               <v-list-item-title >
-                <router-link to="/">Home</router-link>
+                home
               </v-list-item-title>
             </v-list-item>
 
-            <v-list-item>
+            <v-list-item :to="{path: '/cadastrar-espaco'}">
               <v-list-item-title>
-                <router-link to="/cadastrar-espaco">Cadastrar Espaço</router-link>
+                Cadastrar Espaço
               </v-list-item-title>
             </v-list-item>
 
-            <v-list-item>
+            <v-list-item :to="{path: '/listar-espacos'}">
               <v-list-item-title>
-                 <router-link to="/listar-espacos">Listar Espaços</router-link>
+                 Listar Espaços
               </v-list-item-title>
             </v-list-item>
 
@@ -88,23 +86,8 @@ export default {
 };
 </script>
 <style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-}
-#nav {
-  padding-top: 100px;
-  padding-bottom: 20px;
-}
-#nav a {
-  font-weight: bold;
-  color: #2c3e50;
-}
-#nav a.router-link-exact-active {
-  color: #42b983;
+li a{
+  text-decoration: none;
 }
 
 </style>
