@@ -53,8 +53,10 @@
               </v-list-item-title>
             </v-list-item>
 
-            <v-list-item>
-              <v-list-item-title>Buzz</v-list-item-title>
+            <v-list-item :to="{path: '/cadastro-reserva'}">
+              <v-list-item-title>
+                 Reservar Sala
+              </v-list-item-title>
             </v-list-item>
           </v-list-item-group>
         </v-list>

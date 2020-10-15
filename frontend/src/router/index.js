@@ -19,13 +19,18 @@ const routes = [
   {
     path: '/cadastrar-espaco',
     name: 'register-space',
-    component: () => import(/* webpackChunkName: "about" */ '../views/RegisterSpace.vue')
+    component: () => import('../views/RegisterSpace.vue')
   },
   {
     path: '/listar-reservas',
     name: 'reservations',
     component: ReservationList
-  }
+  },
+  {
+    path: '/cadastro-reserva',
+    name: 'register-reservation',
+    component: () => import('../views/ReservationRegister.vue')
+  },
 ]
 
 const router = new VueRouter({
