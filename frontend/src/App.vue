@@ -47,6 +47,12 @@
               </v-list-item-title>
             </v-list-item>
 
+            <v-list-item :to="{path: '/listar-reservas'}">
+              <v-list-item-title>
+                 Listar Reservas
+              </v-list-item-title>
+            </v-list-item>
+
             <v-list-item>
               <v-list-item-title>Buzz</v-list-item-title>
             </v-list-item>
