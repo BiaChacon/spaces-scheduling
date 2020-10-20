@@ -9,7 +9,7 @@
 
           <v-list-item-content>
             <v-list-item-title>
-              <strong>Salas</strong>
+              <strong>Agendador de Salas</strong>
             </v-list-item-title>
           </v-list-item-content>
         </v-list-item>
@@ -29,7 +29,7 @@
     </v-navigation-drawer>
     <v-app-bar app color="accent-4" dense dark clipped-left>
       <v-app-bar-nav-icon dark @click.stop="drawer = !drawer"></v-app-bar-nav-icon>
-      <v-toolbar-title dark>PoP Tickets</v-toolbar-title>
+      <!-- <v-toolbar-title dark>PoP Tickets</v-toolbar-title> -->
       <div class="flex-grow-1"></div>
       <v-btn icon>
         <!-- <v-icon>exit_to_app</v-icon> -->
@@ -46,8 +46,8 @@ export default {
       items: [
         { title: "Home", icon: "mdi-home", to: "home" },
         { title: "Novo Espaço", icon: "mdi-home", to: "register-space" },
-        { title: "Reservas", icon: "mdi-home", to: "reservations" },
-        { title: "Faça a sua reserva", icon: "mdi-home", to: "register-reservation" }
+        { title: "Calendário", icon: "mdi-home", to: "reservations" },
+        { title: "Reservar Sala", icon: "mdi-home", to: "register-reservation" },
       ]
     };
   },

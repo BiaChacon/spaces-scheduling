@@ -31,8 +31,9 @@
   </v-card>
 </template>
 <script>
-import axios from "axios";
-
+// import axios from "axios";
+import ApiService from '../services/ApiService';
+const http = new ApiService('spaces');
 export default {
   data: () => ({
     spaces: [],
@@ -45,9 +46,7 @@ export default {
     ],
   }),
   async created() {
-    // GET request using axios with async/await
-    const response = await axios.get("http://localhost:3333/spaces");
-    console.log(response.data);
+    let response = await http.getList('spaces');
     this.spaces = response.data;
   },
 };
