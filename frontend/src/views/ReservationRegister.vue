@@ -4,7 +4,7 @@
     <v-form class="m-3" style="margin: 30px">
       <v-select
         class="m-2"
-        v-model="select"
+        v-model="spaces"
         :items="items"
         :error-messages="selectErrors"
         label="Espaços"
@@ -58,13 +58,20 @@
       <v-checkbox v-model="h2" :label="schedular[7]" value="Jacob"></v-checkbox>
       <v-checkbox v-model="h2" :label="schedular[8]" value="Jacob"></v-checkbox>
       <v-checkbox v-model="h2" :label="schedular[9]" value="Jacob"></v-checkbox>
-      <v-checkbox v-model="h2" :label="schedular[10]" value="Jacob"></v-checkbox>
+      <v-checkbox
+        v-model="h2"
+        :label="schedular[10]"
+        value="Jacob"
+      ></v-checkbox>
     </v-form>
   </v-card>
 </template>
 <style scoped>
 </style>
 <script>
+import ApiService from "../services/ApiService";
+const http = new ApiService('spaces');
+
 export default {
   data: () => ({
     schedular: [
@@ -80,6 +87,13 @@ export default {
       "16:50-17:40",
       "17:40-18:30",
     ],
+    spaces: []
   }),
+  async created() {
+    window.console.log("reservation page created");
+    let response = await http.getList();
+    this.spaces = response.data;
+    window.console.log(response.data);
+  },
 };
 </script>

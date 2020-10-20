@@ -31,7 +31,6 @@
   </v-card>
 </template>
 <script>
-// import axios from "axios";
 import ApiService from '../services/ApiService';
 const http = new ApiService('spaces');
 export default {
