@@ -1,8 +1,34 @@
 <template>
-  <div>
+  <!-- <div>
     <p>Lista de espaços</p>
     <b-table striped hover :items="spaces" :fields="fields" fixed width="200px"></b-table>
-  </div>
+  </div> -->
+  <v-card width="700px" class="mx-auto">
+    <v-card-title class="display-1">
+      <!-- {{ title }} -->
+      <!-- <div class="flex-grow-1"></div>
+      <v-text-field
+        v-model="search"
+        append-icon="search"
+        label="Buscar"
+        single-line
+        hide-details
+      ></v-text-field> -->
+    </v-card-title>
+    <v-data-table :items="spaces" :headers="fields" loading-text="Sem dados">
+      <!-- :search="search"
+       -->
+      <!-- <template v-slot:item.created_at="{ item }">
+        <v-chip dark>{{ item.created_at | formatDate }}</v-chip>
+      </template>
+      <template v-slot:item.action="{ item }">
+        <v-card width="170px" @click="click('occurrence_details', item)">
+          <v-icon color="secondary" large>list_alt</v-icon>
+          <span class="font-weight-bold">Mais Informações</span>
+        </v-card>
+      </template> -->
+    </v-data-table>
+  </v-card>
 </template>
 <script>
 import axios from "axios";
@@ -10,13 +36,13 @@ import axios from "axios";
 export default {
   data: () => ({
     spaces: [],
-    fields : [
-      { key: 'name', label: 'Nome', sortable: true },
-      { key: 'qtdPeople', label: 'Capacidade', sortable: true },
-      { key: 'description', label: 'Descrição' },
-      { key: 'localization', label: 'Localização' },
-      { key: 'description', label: 'Responsavel' }
-    ]
+    fields: [
+      { value: "name", text: "Nome", sortable: true },
+      { value: "qtdPeople", text: "Capacidade", sortable: true },
+      { value: "description", text: "Descrição" },
+      // { value: "localization", text: "Localização" },
+      // { value: "description", text: "Responsavel" },
+    ],
   }),
   async created() {
     // GET request using axios with async/await
