@@ -15,9 +15,9 @@
         </v-list-item>
         <v-divider></v-divider>
         <v-list-item v-for="item in items" :key="item.title" @click="navegateTo(item.to)">
-          <!-- <v-list-item-icon>
+          <v-list-item-icon>
             <v-icon>{{ item.icon }}</v-icon>
-          </v-list-item-icon> -->
+          </v-list-item-icon>
 
           <v-list-item-content >
             <v-list-item-title>
@@ -32,7 +32,7 @@
       <v-toolbar-title dark>PoP Tickets</v-toolbar-title>
       <div class="flex-grow-1"></div>
       <v-btn icon>
-        <v-icon>exit_to_app</v-icon>
+        <!-- <v-icon>exit_to_app</v-icon> -->
       </v-btn>
     </v-app-bar>
   </div>
@@ -44,10 +44,10 @@ export default {
     return {
       drawer: true,
       items: [
-        { title: "Home", icon: "house", to: "home" },
-        { title: "Novo Espaço", icon: "report", to: "register-space" },
-        { title: "Reservas", icon: "new_releases", to: "reservations" },
-        { title: "Faça a sua reserva", icon: "next_week", to: "register-reservation" }
+        { title: "Home", icon: "mdi-home", to: "home" },
+        { title: "Novo Espaço", icon: "mdi-home", to: "register-space" },
+        { title: "Reservas", icon: "mdi-home", to: "reservations" },
+        { title: "Faça a sua reserva", icon: "mdi-home", to: "register-reservation" }
       ]
     };
   },
