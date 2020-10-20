@@ -3,13 +3,13 @@
     <v-navigation-drawer v-model="drawer" app clipped dark color="#343A40" width='180'>
       <v-list dense>
         <v-list-item>
-          <v-list-item-avatar>
-            <!-- <v-img src="../../public/favicon.ico"></v-img> -->
-          </v-list-item-avatar>
+          <!-- <v-list-item-avatar>
+            <v-img src="../../public/favicon.ico"></v-img>
+          </v-list-item-avatar> -->
 
           <v-list-item-content>
             <v-list-item-title>
-              <strong>PoP Tickets</strong>
+              <strong>Salas</strong>
             </v-list-item-title>
           </v-list-item-content>
         </v-list-item>
