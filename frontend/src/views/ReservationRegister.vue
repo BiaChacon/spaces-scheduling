@@ -5,8 +5,7 @@
       <v-select
         class="m-2"
         v-model="spaces"
-        :items="items"
-        :error-messages="selectErrors"
+        :items="selectLabels"
         label="Espaços"
         required
         @change="$v.select.$touch()"
@@ -70,7 +69,7 @@
 </style>
 <script>
 import ApiService from "../services/ApiService";
-const http = new ApiService('spaces');
+const http = new ApiService("spaces");
 
 export default {
   data: () => ({
@@ -87,13 +86,62 @@ export default {
       "16:50-17:40",
       "17:40-18:30",
     ],
-    spaces: []
+    spaces: [],
+    time: null,
+    menu2: false,
+    menu1: false,
+    number: "",
+    date: new Date().toISOString().substr(0, 10),
+    // dateFormatted: this.formatDate(new Date().toISOString().substr(0, 10)),
+    selectLabels: [],
+    selectIds: []
   }),
+  computed: {
+    computedDateFormatted() {
+      return this.formatDate(this.date);
+    },
+    numberErrors() {
+      const errors = [];
+      if (!this.$v.number.$dirty) return errors;
+      !this.$v.number.required && errors.push("Numero é obrigatorio");
+      return errors;
+    },
+    selectErrors() {
+      const errors = [];
+      if (!this.$v.select.$dirty) return errors;
+      !this.$v.select.required && errors.push("Tipo de serviço é obrigatorio");
+      return errors;
+    },
+  },
+  watch: {
+    date() {
+      this.dateFormatted = this.formatDate(this.date);
+    },
+  },
+  methods: {
+    formatDate(date) {
+      if (!date) return null;
+      const [year, month, day] = date.split("-");
+      return `${day}/${month}/${year}`;
+    },
+  },
   async created() {
     window.console.log("reservation page created");
     let response = await http.getList();
     this.spaces = response.data;
     window.console.log(response.data);
+    this.spaces.map((item) => {
+      this.selectLabels.push(item.name);
+    });
+    this.spaces.map((space) =>{
+      this.selectIds.push(space.id);
+    })
+    window.console.log("labels dos spacoes");
+    window.console.log(this.selectLabels);
+    window.console.log("Ids dos spaces");
+    window.console.log(this.selectIds);
+
+
   },
 };
 </script>
