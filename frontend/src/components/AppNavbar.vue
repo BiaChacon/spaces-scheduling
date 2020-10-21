@@ -9,7 +9,7 @@
 
           <v-list-item-content>
             <v-list-item-title>
-              <strong>Agendador de Salas</strong>
+              <strong>Agendamento de Salas</strong>
             </v-list-item-title>
           </v-list-item-content>
         </v-list-item>

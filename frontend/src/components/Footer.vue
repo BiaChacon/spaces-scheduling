@@ -2,10 +2,7 @@
   <v-footer padless dark>
     <v-col class="text-center error" cols="12">
       {{ new Date().getFullYear() }} —
-      <strong>Gerenciador de salas</strong>
-      <!-- <v-btn icon>
-        <v-icon>code</v-icon>
-      </v-btn> -->
+      <strong>Sistema de Agendamento de Salas</strong>
     </v-col>
   </v-footer>
 </template>
