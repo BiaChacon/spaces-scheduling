@@ -61,9 +61,8 @@ export default {
       drawer: true,
       items: [
         { title: "Home", icon: "mdi-home", to: "home" },
-        { title: "Novo Espaço", icon: "mdi-home", to: "register-space" },
-        { title: "Calendário", icon: "mdi-home", to: "reservations" },
-        { title: "Reservar Sala", icon: "mdi-home", to: "register-reservation" },
+        { title: "Cadastrar Espaço", icon: "mdi-home", to: "register-space" },
+        { title: "Cadastrar Reservar", icon: "mdi-home", to: "register-reservation" },
       ]
     };
   },
