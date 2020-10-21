@@ -26,15 +26,12 @@ module.exports = {
     if(space.length==0)
       return response.status(400).send('Bad request! Space does not exist!');
     
-    if(!normal){
-      var data1 = new Date(dateStart);
-      var data2 = new Date(dateEnd);
-      if(data1>=data2)
-        return response.status(400).send('Bad request! The end date of the recurring reservation must be after the start date!');
+    if(normal){
+      dataEnd = dateStart;
     }else{
       var data1 = new Date(dateStart);
       var data2 = new Date(dateEnd);
-      if(data1!==data2)
+      if(data1>=data2)
         return response.status(400).send('Bad request! The end date of the recurring reservation must be after the start date!');
     }
     //get reservations for a space
