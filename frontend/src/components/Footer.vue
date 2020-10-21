@@ -1,6 +1,6 @@
 <template>
   <v-footer padless dark>
-    <v-col class="text-center error" cols="12">
+    <v-col class="text-center" cols="12">
       {{ new Date().getFullYear() }} —
       <strong>Sistema de Agendamento de Salas</strong>
     </v-col>

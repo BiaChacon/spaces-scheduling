@@ -1,6 +1,30 @@
 <template>
   <div>
-    <v-navigation-drawer v-model="drawer" app clipped dark color="#343A40" width='180'>
+      <v-app-bar 
+        app 
+        clipped-rigth 
+        flat 
+        color="#0091EA" 
+        dark
+      >
+      <v-app-bar-nav-icon dark @click.stop="drawer = !drawer"></v-app-bar-nav-icon>
+      <v-toolbar-title dark class="text-center">Spaces Scheduling</v-toolbar-title>
+      <div class="flex-grow-1"></div>
+      <v-btn icon>
+        <!-- <v-icon>exit_to_app</v-icon> -->
+      </v-btn>
+    </v-app-bar>
+    <v-navigation-drawer 
+      persistent
+      :mini-variant="miniVariant"
+      :clipped="clipped"
+      v-model="drawer"
+      enable-resize-watcher
+      fixed
+      app
+      color="#0091EA" 
+      dark
+    >
       <v-list dense>
         <v-list-item>
           <!-- <v-list-item-avatar>
@@ -27,14 +51,6 @@
         </v-list-item>
       </v-list>
     </v-navigation-drawer>
-    <v-app-bar app color="accent-4" dense dark clipped-left>
-      <v-app-bar-nav-icon dark @click.stop="drawer = !drawer"></v-app-bar-nav-icon>
-      <!-- <v-toolbar-title dark>PoP Tickets</v-toolbar-title> -->
-      <div class="flex-grow-1"></div>
-      <v-btn icon>
-        <!-- <v-icon>exit_to_app</v-icon> -->
-      </v-btn>
-    </v-app-bar>
   </div>
 </template>
 

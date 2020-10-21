@@ -1,23 +1,23 @@
 <template>
   <v-app>
     <app-navbar></app-navbar>
-    <v-content>
+    <v-main>
       <v-container fluid>
         <router-view></router-view>
       </v-container>
-    </v-content>
-    <Footer></Footer>
+    </v-main>
+    <!-- <Footer></Footer> -->
   </v-app>
 </template>
 
 <script>
 import AppNavbar from "./components/AppNavbar";
-import Footer from './components/Footer';
+// import Footer from './components/Footer';
 
 export default {
   name: "App",
   components: {
-    Footer,
+    // Footer,
     AppNavbar,
   },
   data: () => ({
