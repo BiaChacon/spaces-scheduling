@@ -4,13 +4,13 @@ POST http://localhost:3333/register-reservation HTTP/1.1
 content-type: application/json
 
 {
-    "normal": true,
-    "dateStart": "2020-12-21",
-    "dateEnd": "2020-12-22",
-    "justification": "eu quero a sala dia 12",
-    "schedule": "ninguem",
-    "canceled": false,
-    "spaceId": "5d35a16f"
+    "normal": "true",
+    "dateStart": "2020-11-01",
+    "dateEnd": "2020-11-01",
+    "justification": "lalalala",
+    "schedule": "7;1,2,3",
+    "canceled": "false",
+    "spaceId": "71b89e93"
 }
 
 ### Getting all reservations

@@ -4,7 +4,7 @@
     <v-form class="m-3" style="margin: 30px">
       <v-select
         class="m-2"
-        v-model="spaces"
+        v-model="selected"
         :items="selectLabels"
         label="Espaços"
         required
@@ -18,6 +18,7 @@
         rows="3"
         row-height="25"
         shaped
+        v-model="justification"
       ></v-textarea>
 
       <v-menu
@@ -34,7 +35,7 @@
           <v-text-field
             v-model="dateFormatted"
             label="Data"
-            hint="12/02/2006"
+            hint="DD/MM/AAAA"
             persistent-hint
             @blur="date = parseDate(dateFormatted)"
             v-on="on"
@@ -62,6 +63,8 @@
         :label="schedular[10]"
         value="Jacob"
       ></v-checkbox>
+      <v-btn class="m-2" @click.prevent="submit">Salvar</v-btn>
+      <v-btn class="m-2" @click="clear">Limpar Campos</v-btn>
     </v-form>
   </v-card>
 </template>
@@ -91,10 +94,13 @@ export default {
     menu2: false,
     menu1: false,
     number: "",
+    justification: "",
+    selected: null,
     date: new Date().toISOString().substr(0, 10),
     // dateFormatted: this.formatDate(new Date().toISOString().substr(0, 10)),
     selectLabels: [],
-    selectIds: []
+    selectIds: [],
+    newReserve: {},
   }),
   computed: {
     computedDateFormatted() {
@@ -124,6 +130,27 @@ export default {
       const [year, month, day] = date.split("-");
       return `${day}/${month}/${year}`;
     },
+    sumit() {
+      // let dataCompleta = `${this.date}T${this.time}`;
+      this.newReserve = {
+        normal: true,
+        dateStart: this.date,
+        dateEnd: this.date,
+        justification: this.justification,
+        schedule: "1;1,2,3",
+        canceled: false,
+        spaceId: "71b89e93",
+      };
+      this.$store.dispatch("createTicket", this.newTicket);
+      // this.$swal("Ticket Cadastrado", "reparo relatado com sucesso", "success");
+      this.$v.$touch();
+      this.clear();
+    },
+    clear() {
+      this.$v.$reset();
+      // this.number = "";
+      // this.select = null;
+    },
   },
   async created() {
     window.console.log("reservation page created");
@@ -133,15 +160,13 @@ export default {
     this.spaces.map((item) => {
       this.selectLabels.push(item.name);
     });
-    this.spaces.map((space) =>{
+    this.spaces.map((space) => {
       this.selectIds.push(space.id);
-    })
+    });
     window.console.log("labels dos spacoes");
     window.console.log(this.selectLabels);
     window.console.log("Ids dos spaces");
     window.console.log(this.selectIds);
-
-
   },
 };
 </script>
