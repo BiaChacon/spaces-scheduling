@@ -8,9 +8,8 @@ import axios from "axios";
 export default {
   data: () => ({
     reservations: [],
-    
   }),
-  async created() {
+  async mounted() {
     // GET request using axios with async/await
     const response = await axios.get("http://localhost:3333/reservations");
     console.log(response.data);

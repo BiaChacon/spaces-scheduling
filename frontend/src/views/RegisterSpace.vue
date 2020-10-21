@@ -104,17 +104,12 @@
         <b-button type="submit" variant="primary" id="btnRegister"
           >Cadastrar</b-button
         >
-        <b-button type="reset" variant="danger" id="btnCancel"
-          >Cancelar</b-button
-        >
       </b-form>
-      <!-- </div> -->
     </div>
   </v-card>
 </template>
 
 <script>
-// import axios from "axios";
 import ApiService from '../services/ApiService';
 const http = new ApiService('spaces');
 export default {
@@ -148,7 +143,6 @@ export default {
   methods: {
     onSubmit(evt) {
       evt.preventDefault();
-      // axios.post("http://localhost:3333/spaces", this.form);
       http.create(this.form);
       alert("Espaço salvo");
       this.$router.push("/");
