@@ -49,15 +49,18 @@
         ></v-date-picker>
       </v-menu>
       <p class="text-left">Selecione o horario:</p>
-      <v-checkbox v-model="h1" :label="schedular[0]" value="John"></v-checkbox>
-      <v-checkbox v-model="h2" :label="schedular[2]" value="Jacob"></v-checkbox>
-      <v-checkbox v-model="h3" :label="schedular[3]" value="Jacob"></v-checkbox>
-      <v-checkbox v-model="h5" :label="schedular[4]" value="Jacob"></v-checkbox>
-      <v-checkbox v-model="h2" :label="schedular[5]" value="Jacob"></v-checkbox>
-      <v-checkbox v-model="h2" :label="schedular[6]" value="Jacob"></v-checkbox>
-      <v-checkbox v-model="h2" :label="schedular[7]" value="Jacob"></v-checkbox>
-      <v-checkbox v-model="h2" :label="schedular[8]" value="Jacob"></v-checkbox>
-      <v-checkbox v-model="h2" :label="schedular[9]" value="Jacob"></v-checkbox>
+      <v-checkbox v-model="checkState[0]" :label="schedular[0]"></v-checkbox>
+      <v-checkbox v-model="checkState[1]" :label="schedular[1]"></v-checkbox>
+      <v-checkbox v-model="checkState[2]" :label="schedular[2]"></v-checkbox>
+      <v-checkbox v-model="checkState[3]" :label="schedular[3]"></v-checkbox>
+      <v-checkbox v-model="checkState[4]" :label="schedular[4]"></v-checkbox>
+      <v-checkbox v-model="checkState[5]" :label="schedular[5]"></v-checkbox>
+      <v-checkbox v-model="checkState[6]" :label="schedular[6]"></v-checkbox>
+      <v-checkbox v-model="checkState[7]" :label="schedular[7]"></v-checkbox>
+      <v-checkbox v-model="checkState[8]" :label="schedular[8]"></v-checkbox>
+      <v-checkbox v-model="checkState[9]" :label="schedular[9]"></v-checkbox>
+
+
       <v-checkbox
         v-model="h2"
         :label="schedular[10]"
@@ -88,6 +91,19 @@ export default {
       "14:55-15:45",
       "16:50-17:40",
       "17:40-18:30",
+    ],
+    checkState: [
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
     ],
     spaces: [],
     time: null,
@@ -131,7 +147,6 @@ export default {
       return `${day}/${month}/${year}`;
     },
     submit() {
-      // let dataCompleta = `${this.date}T${this.time}`;
       this.newReserve = {
         normal: true,
         dateStart: this.date,
@@ -139,14 +154,19 @@ export default {
         justification: this.justification,
         schedule: "1;1,2,3",
         canceled: false,
-        spaceId: this.selectIds[this.selectLabels.indexOf(this.selected)]  ,
+        spaceId: this.selectIds[this.selectLabels.indexOf(this.selected)],
       };
+      let hour = "";
       window.console.log(this.newReserve);
-      this.$v.$touch();
-      this.clear();
+      /** percorrendo o array de checkboxes e colocar em uma 
+          string o indice de cada checkbox marcado +1 **/
+      this.checkState.map((state,index) => {
+        state === true ? hour += `${index+1},` : hour += "";
+      }) 
+      window.console.log(hour);
     },
     clear() {
-      this.$v.$reset();
+      // this.$v.$reset();
       this.justification = "";
       this.schedular[0] = false;
     },
