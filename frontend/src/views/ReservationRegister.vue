@@ -158,19 +158,20 @@ export default {
       };
       let hour = "";
       window.console.log(this.newReserve);
-      /** percorrendo o array de checkboxes e colocar em uma 
-          string o indice de cada checkbox marcado +1 **/
+      /** scrolls through the list of checkboxes and generates a string 
+       * concatenating the index of all those that are marked + 1 **/
       this.checkState.map((state,index) => {
         state === true ? hour += `${index+1},` : hour += "";
       }) 
-      window.console.log(hour);
-      window.console.log(this.dateFormatted.getDay())
+      window.console.log(hour); 
+      let x = new Date('2020-10-30');
+      window.console.log(x.getDay());
     },
     clear() {
-      // this.$v.$reset();
       this.justification = "";
       this.checkState[0] = false;
       this.date = "";
+      this.selected = "";
     },
   },
   async created() {
@@ -180,14 +181,9 @@ export default {
     window.console.log(response.data);
     this.spaces.map((item) => {
       this.selectLabels.push(item.name);
+      this.selectIds.push(item.id);
     });
-    this.spaces.map((space) => {
-      this.selectIds.push(space.id);
-    });
-    window.console.log("labels dos spacoes");
-    window.console.log(this.selectLabels);
-    window.console.log("Ids dos spaces");
-    window.console.log(this.selectIds);
+    
   },
 };
 </script>
