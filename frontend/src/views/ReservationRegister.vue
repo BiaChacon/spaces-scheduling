@@ -164,11 +164,13 @@ export default {
         state === true ? hour += `${index+1},` : hour += "";
       }) 
       window.console.log(hour);
+      window.console.log(this.dateFormatted.getDay())
     },
     clear() {
       // this.$v.$reset();
       this.justification = "";
-      this.schedular[0] = false;
+      this.checkState[0] = false;
+      this.date = "";
     },
   },
   async created() {
