@@ -64,7 +64,7 @@
         value="Jacob"
       ></v-checkbox>
       <v-btn class="m-2" @click.prevent="submit">Salvar</v-btn>
-      <v-btn class="m-2" @click="clear">Limpar Campos</v-btn>
+      <v-btn class="m-2" @click.prevent="clear">Limpar Campos</v-btn>
     </v-form>
   </v-card>
 </template>
@@ -130,7 +130,7 @@ export default {
       const [year, month, day] = date.split("-");
       return `${day}/${month}/${year}`;
     },
-    sumit() {
+    submit() {
       // let dataCompleta = `${this.date}T${this.time}`;
       this.newReserve = {
         normal: true,
@@ -139,17 +139,16 @@ export default {
         justification: this.justification,
         schedule: "1;1,2,3",
         canceled: false,
-        spaceId: "71b89e93",
+        spaceId: this.selectIds[this.selectLabels.indexOf(this.selected)]  ,
       };
-      this.$store.dispatch("createTicket", this.newTicket);
-      // this.$swal("Ticket Cadastrado", "reparo relatado com sucesso", "success");
+      window.console.log(this.newReserve);
       this.$v.$touch();
       this.clear();
     },
     clear() {
       this.$v.$reset();
-      // this.number = "";
-      // this.select = null;
+      this.justification = "";
+      this.schedular[0] = false;
     },
   },
   async created() {
