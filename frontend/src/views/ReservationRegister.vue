@@ -146,7 +146,8 @@ export default {
       const [year, month, day] = date.split("-");
       return `${day}/${month}/${year}`;
     },
-    submit() {
+    async submit() {
+      const api = new ApiService("register-reservation");
       let hour = "";
       
       /** scrolls through the list of checkboxes and generates a string
@@ -167,12 +168,13 @@ export default {
         dateStart: this.date,
         dateEnd: this.date,
         justification: this.justification,
-        schedule: "1;1,2,3",
+        schedule: this.horario,
         canceled: false,
         spaceId: this.selectIds[this.selectLabels.indexOf(this.selected)],
       };
       window.console.log(this.newReserve);
-      
+      await api.create(this.newReserve)
+      this.clear();
     },
     clear() {
       this.justification = "";
