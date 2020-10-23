@@ -60,7 +60,6 @@
       <v-checkbox v-model="checkState[8]" :label="schedular[8]"></v-checkbox>
       <v-checkbox v-model="checkState[9]" :label="schedular[9]"></v-checkbox>
 
-
       <v-checkbox
         v-model="h2"
         :label="schedular[10]"
@@ -117,6 +116,7 @@ export default {
     selectLabels: [],
     selectIds: [],
     newReserve: {},
+    horario: ""
   }),
   computed: {
     computedDateFormatted() {
@@ -147,6 +147,21 @@ export default {
       return `${day}/${month}/${year}`;
     },
     submit() {
+      let hour = "";
+      
+      /** scrolls through the list of checkboxes and generates a string
+       * concatenating the index of all those that are marked + 1 **/
+      this.checkState.map((state, index) => {
+        state === true ? (hour += `${index + 1},`) : (hour += "");
+      });
+      window.console.log(hour);
+      let day = new Date(this.date);
+      window.console.log(day.getDay());
+      hour = hour.substring(0, hour.length - 1);
+      console.log(hour);
+      this.horario = `${day.getDay()};${hour}`;
+      window.console.log(this.horario);
+
       this.newReserve = {
         normal: true,
         dateStart: this.date,
@@ -156,16 +171,8 @@ export default {
         canceled: false,
         spaceId: this.selectIds[this.selectLabels.indexOf(this.selected)],
       };
-      let hour = "";
       window.console.log(this.newReserve);
-      /** scrolls through the list of checkboxes and generates a string 
-       * concatenating the index of all those that are marked + 1 **/
-      this.checkState.map((state,index) => {
-        state === true ? hour += `${index+1},` : hour += "";
-      }) 
-      window.console.log(hour); 
-      let x = new Date(this.date);
-      window.console.log(x.getDay());
+      
     },
     clear() {
       this.justification = "";
@@ -183,7 +190,6 @@ export default {
       this.selectLabels.push(item.name);
       this.selectIds.push(item.id);
     });
-    
   },
 };
 </script>
