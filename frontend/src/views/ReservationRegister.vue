@@ -164,7 +164,7 @@ export default {
         state === true ? hour += `${index+1},` : hour += "";
       }) 
       window.console.log(hour); 
-      let x = new Date('2020-10-30');
+      let x = new Date(this.date);
       window.console.log(x.getDay());
     },
     clear() {
