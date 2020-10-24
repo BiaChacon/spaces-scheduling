@@ -30,7 +30,7 @@ module.exports = function availabilityCheck(normal,dateStart,dateEnd,schedule,re
           let s2Time = s2[1].split(",");
           //comparar arrays de hora
           for(let t=0; t<s1Time.length; t++){
-            if(s1Time[t] == s2Time[t])
+            if(s1Time[t] == s2Time[0])
               return false;
           }
         }
