@@ -7,6 +7,8 @@ const ReservationController = require('./controllers/ReservationController');
 const routes = express.Router();
 
 routes.get('/spaces', SpaceController.index);
+routes.get('/spaces/:id', SpaceController.show);
+routes.get('/check-availability', SpaceController.availability);
 
 routes.post('/spaces', celebrate({
      [Segments.BODY]: Joi.object().keys({
