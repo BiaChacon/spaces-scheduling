@@ -61,8 +61,10 @@ export default {
       drawer: true,
       items: [
         { title: "Home", icon: "mdi-home", to: "home" },
+        { title: "Ver disponibilidade", icon: "mdi-home", to: "check-availability" },
         { title: "Cadastrar Espaço", icon: "mdi-home", to: "register-space" },
-        { title: "Cadastrar Reservar", icon: "mdi-home", to: "register-reservation" },
+        { title: "Cadastrar Reservar Normal", icon: "mdi-home", to: "register-reservation-normal" },
+        { title: "Cadastrar Reservar Recorrente", icon: "mdi-home", to: "register-reservation-recurring" },
       ]
     };
   },

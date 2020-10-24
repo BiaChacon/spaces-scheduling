@@ -1,8 +1,14 @@
-import Vue from 'vue'
-import VueRouter from 'vue-router'
-import SpacesList from '../views/SpacesList.vue'
-import ReservationList from '../views/ReservationList.vue'
-Vue.use(VueRouter)
+import Vue from 'vue';
+import VueRouter from 'vue-router';
+
+import SpacesList from '../views/SpacesList.vue';
+import CheckAvailability from '../views/CheckAvailability';
+import RegisterSpace from '../views/RegisterSpace';
+import ReservationList from '../views/ReservationList.vue';
+import ReservationNormal from '../views/RegisterReservationNormal.vue';
+import ReservationRecurring from '../views/RegisterReservationRecurring.vue';
+
+Vue.use(VueRouter);
 
 const routes = [
   {
@@ -16,9 +22,14 @@ const routes = [
     component: SpacesList
   },
   {
+    path: '/ver-disponibilidade',
+    name: 'check-availability',
+    component: CheckAvailability
+  },
+  {
     path: '/cadastrar-espaco',
     name: 'register-space',
-    component: () => import('../views/RegisterSpace.vue')
+    component: RegisterSpace
   },
   {
     path: '/listar-reservas',
@@ -26,9 +37,14 @@ const routes = [
     component: ReservationList
   },
   {
-    path: '/cadastro-reserva',
-    name: 'register-reservation',
-    component: () => import('../views/ReservationRegister.vue')
+    path: '/cadastro-reserva-normal',
+    name: 'register-reservation-normal',
+    component: ReservationNormal
+  },
+  {
+    path: '/cadastro-reserva-recorrente',
+    name: 'register-reservation-recurring',
+    component: ReservationRecurring
   },
 ]
 

@@ -33,21 +33,59 @@
       >
         <template v-slot:activator="{ on }">
           <v-text-field
-            v-model="dateFormatted"
-            label="Data"
+            v-model="dateFormatted1"
+            label="Data Inicio"
             hint="DD/MM/AAAA"
             persistent-hint
-            @blur="date = parseDate(dateFormatted)"
+            @blur="dateStart = parseDate(dateFormatted1)"
             v-on="on"
             class="m-2"
           ></v-text-field>
         </template>
         <v-date-picker
-          v-model="date"
+          v-model="dateStart"
           no-title
           @input="menu1 = false"
         ></v-date-picker>
       </v-menu>
+
+      <v-menu
+        ref="menu2"
+        v-model="menu2"
+        :close-on-content-click="false"
+        transition="scale-transition"
+        offset-y
+        full-width
+        max-width="290px"
+        min-width="290px"
+      >
+        <template v-slot:activator="{ on }">
+          <v-text-field
+            v-model="dateFormatted2"
+            label="Data Fim"
+            hint="DD/MM/AAAA"
+            persistent-hint
+            @blur="dateEnd = parseDate(dateFormatted2)"
+            v-on="on"
+            class="m-2"
+          ></v-text-field>
+        </template>
+        <v-date-picker
+          v-model="dateEnd"
+          no-title
+          @input="menu2 = false"
+        ></v-date-picker>
+      </v-menu>
+
+      <p class="text-left">Selecione o dia da semana:</p>
+      <v-checkbox v-model="checkStateDayWeek[6]" :label="dayWeek[0]"></v-checkbox>
+      <v-checkbox v-model="checkStateDayWeek[0]" :label="dayWeek[1]"></v-checkbox>
+      <v-checkbox v-model="checkStateDayWeek[1]" :label="dayWeek[2]"></v-checkbox>
+      <v-checkbox v-model="checkStateDayWeek[2]" :label="dayWeek[3]"></v-checkbox>
+      <v-checkbox v-model="checkStateDayWeek[3]" :label="dayWeek[4]"></v-checkbox>
+      <v-checkbox v-model="checkStateDayWeek[4]" :label="dayWeek[5]"></v-checkbox>
+      <v-checkbox v-model="checkStateDayWeek[5]" :label="dayWeek[6]"></v-checkbox>
+
       <p class="text-left">Selecione o horario:</p>
       <v-checkbox v-model="checkState[0]" :label="schedular[0]"></v-checkbox>
       <v-checkbox v-model="checkState[1]" :label="schedular[1]"></v-checkbox>
@@ -60,13 +98,7 @@
       <v-checkbox v-model="checkState[8]" :label="schedular[8]"></v-checkbox>
       <v-checkbox v-model="checkState[9]" :label="schedular[9]"></v-checkbox>
 
-      <v-checkbox
-        v-model="h2"
-        :label="schedular[10]"
-        value="Jacob"
-      ></v-checkbox>
       <v-btn class="m-2" @click.prevent="submit">Salvar</v-btn>
-      <v-btn class="m-2" @click.prevent="clear">Limpar Campos</v-btn>
     </v-form>
   </v-card>
 </template>
@@ -78,6 +110,15 @@ const http = new ApiService("spaces");
 
 export default {
   data: () => ({
+    dayWeek: [
+      "Domingo",
+      "Segunda",
+      "Terça",
+      "Quarta",
+      "Quinta",
+      "Sexta",
+      "Sabádo",
+    ],
     schedular: [
       "07:00-07:50",
       "07:50-08:40",
@@ -90,6 +131,15 @@ export default {
       "14:55-15:45",
       "16:50-17:40",
       "17:40-18:30",
+    ],
+    checkStateDayWeek: [
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
+      false,
     ],
     checkState: [
       false,
@@ -105,14 +155,13 @@ export default {
       false,
     ],
     spaces: [],
-    time: null,
     menu2: false,
     menu1: false,
     number: "",
     justification: "",
     selected: null,
-    date: new Date().toISOString().substr(0, 10),
-    // dateFormatted: this.formatDate(new Date().toISOString().substr(0, 10)),
+    dateStart: new Date().toISOString().substr(0, 10),
+    dateEnd: new Date().toISOString().substr(0, 10),
     selectLabels: [],
     selectIds: [],
     newReserve: {},
@@ -120,7 +169,7 @@ export default {
   }),
   computed: {
     computedDateFormatted() {
-      return this.formatDate(this.date);
+      return this.formatDate(this.dateStart);
     },
     numberErrors() {
       const errors = [];
@@ -137,7 +186,8 @@ export default {
   },
   watch: {
     date() {
-      this.dateFormatted = this.formatDate(this.date);
+      this.dateFormatted1 = this.formatDate(this.dateStart);
+      this.dateFormatted2 = this.formatDate(this.dateEnd);
     },
   },
   methods: {
@@ -149,37 +199,67 @@ export default {
     async submit() {
       const api = new ApiService("register-reservation");
       let hour = "";
+      let dayWeek = "";
       
       /** scrolls through the list of checkboxes and generates a string
        * concatenating the index of all those that are marked + 1 **/
       this.checkState.map((state, index) => {
         state === true ? (hour += `${index + 1},`) : (hour += "");
       });
-      window.console.log(hour);
-      let day = new Date(this.date);
-      window.console.log(day.getDay());
+
+      this.checkStateDayWeek.map((state, index) => {
+        state === true ? (dayWeek += `${index},`) : (dayWeek += "");
+      });
+
+
       hour = hour.substring(0, hour.length - 1);
-      console.log(hour);
-      this.horario = `${day.getDay()};${hour}`;
-      window.console.log(this.horario);
+      dayWeek = dayWeek.substring(0, dayWeek.length - 1);
+
+      this.horario = `${dayWeek};${hour}`;
 
       this.newReserve = {
-        normal: true,
-        dateStart: this.date,
-        dateEnd: this.date,
+        normal: false,
+        dateStart: this.dateStart,
+        dateEnd: this.dateEnd,
         justification: this.justification,
         schedule: this.horario,
         canceled: false,
         spaceId: this.selectIds[this.selectLabels.indexOf(this.selected)],
       };
-      window.console.log(this.newReserve);
-      await api.create(this.newReserve)
+
+      console.log(this.newReserve);
+
+      await api.create(this.newReserve);
+      alert('Reserva cadastrada com sucesso!');
       this.clear();
+       this.$router.push("/");
     },
     clear() {
       this.justification = "";
-      this.checkState[0] = false;
-      this.date = "";
+      this.checkStateDayWeek = [
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+      ]
+      this.checkState = [
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+        false,
+      ],
+      this.dateStart = "";
+      this.dateEnd = "";
       this.selected = "";
     },
   },
