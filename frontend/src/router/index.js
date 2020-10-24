@@ -2,6 +2,7 @@ import Vue from 'vue';
 import VueRouter from 'vue-router';
 
 import SpacesList from '../views/SpacesList.vue';
+import DetailSpace from '../views/DetailSpace';
 import CheckAvailability from '../views/CheckAvailability';
 import RegisterSpace from '../views/RegisterSpace';
 import ReservationList from '../views/ReservationList.vue';
@@ -20,6 +21,11 @@ const routes = [
     path: '/listar-espacos',
     name: 'spaces',
     component: SpacesList
+  },
+  {
+  path: '/detalhes-espaco',
+  name: 'detail-space',
+  component: DetailSpace
   },
   {
     path: '/ver-disponibilidade',

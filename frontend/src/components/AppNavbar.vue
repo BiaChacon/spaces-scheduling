@@ -8,7 +8,7 @@
         dark
       >
       <v-app-bar-nav-icon dark @click.stop="drawer = !drawer"></v-app-bar-nav-icon>
-      <v-toolbar-title dark class="text-center">Spaces Scheduling</v-toolbar-title>
+      <v-toolbar-title dark class="text-center">{{namePage}}</v-toolbar-title>
       <div class="flex-grow-1"></div>
       <v-btn icon>
         <!-- <v-icon>exit_to_app</v-icon> -->
@@ -38,7 +38,7 @@
           </v-list-item-content>
         </v-list-item>
         <v-divider></v-divider>
-        <v-list-item v-for="item in items" :key="item.title" @click="navegateTo(item.to)">
+        <v-list-item v-for="item in items" :key="item.title" @click="navegateTo(item.to, item.page)">
           <v-list-item-icon>
             <v-icon>{{ item.icon }}</v-icon>
           </v-list-item-icon>
@@ -60,17 +60,19 @@ export default {
     return {
       drawer: true,
       items: [
-        { title: "Home", icon: "mdi-home", to: "home" },
-        { title: "Ver disponibilidade", icon: "mdi-home", to: "check-availability" },
-        { title: "Cadastrar Espaço", icon: "mdi-home", to: "register-space" },
-        { title: "Cadastrar Reservar Normal", icon: "mdi-home", to: "register-reservation-normal" },
-        { title: "Cadastrar Reservar Recorrente", icon: "mdi-home", to: "register-reservation-recurring" },
-      ]
+        { title: "Home", page:"Espaços", icon: "mdi-home", to: "home" },
+        { title: "Ver disponibilidade", page:"Ver disponibilidade", icon: "mdi-home", to: "check-availability" },
+        { title: "Cadastrar Espaço", page:"Cadastro de Espaço", icon: "mdi-home", to: "register-space" },
+        { title: "Cadastrar Reservar Normal", page:"Cadastro Reservar Normal", icon: "mdi-home", to: "register-reservation-normal" },
+        { title: "Cadastrar Reservar Recorrente", page:"Cadastro Reservar Recorrente", icon: "mdi-home", to: "register-reservation-recurring" },
+      ],
+      namePage: "Espaços",
     };
   },
   methods: {
-    navegateTo(where) {
-        this.$router.push({name : where});   
+    navegateTo(where, name) {
+      this.namePage = name;
+      this.$router.push({name : where});
     }
   }
 };

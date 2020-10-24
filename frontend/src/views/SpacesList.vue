@@ -77,6 +77,7 @@
 <script>
 import ApiService from '../services/ApiService';
 const http = new ApiService('spaces');
+
 export default {
   data: () => ({
     spaces: []
@@ -87,7 +88,7 @@ export default {
   },
   methods: {
     async detailSpace(id) {
-      alert(id)
+      this.$router.push('detail-space', id);
     }
   }
 };
