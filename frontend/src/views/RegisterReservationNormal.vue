@@ -116,7 +116,7 @@ export default {
     selectLabels: [],
     selectIds: [],
     newReserve: {},
-    horario: ""
+    horario: "",
   }),
   computed: {
     computedDateFormatted() {
@@ -149,7 +149,7 @@ export default {
     async submit() {
       const api = new ApiService("register-reservation");
       let hour = "";
-      
+
       /** scrolls through the list of checkboxes and generates a string
        * concatenating the index of all those that are marked + 1 **/
       this.checkState.map((state, index) => {
@@ -173,12 +173,14 @@ export default {
         spaceId: this.selectIds[this.selectLabels.indexOf(this.selected)],
       };
       window.console.log(this.newReserve);
-      await api.create(this.newReserve)
+      await api.create(this.newReserve);
+      alert("Reserva cadastrada com sucesso!");
       this.clear();
+      this.$router.push("/");
     },
     clear() {
       this.justification = "";
-      this.checkState = [
+      (this.checkState = [
         false,
         false,
         false,
@@ -190,8 +192,8 @@ export default {
         false,
         false,
         false,
-      ],
-      this.date = "";
+      ]),
+        (this.date = "");
       this.selected = "";
     },
   },
