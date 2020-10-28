@@ -33,11 +33,10 @@
       >
         <template v-slot:activator="{ on }">
           <v-text-field
-            v-model="dateFormatted1"
+            v-model="computedDateFormatted1"
             label="Data Inicio"
             hint="DD/MM/AAAA"
             persistent-hint
-            @blur="dateStart = parseDate(dateFormatted1)"
             v-on="on"
             class="m-2"
           ></v-text-field>
@@ -61,11 +60,10 @@
       >
         <template v-slot:activator="{ on }">
           <v-text-field
-            v-model="dateFormatted2"
+            v-model="computedDateFormatted2"
             label="Data Fim"
             hint="DD/MM/AAAA"
             persistent-hint
-            @blur="dateEnd = parseDate(dateFormatted2)"
             v-on="on"
             class="m-2"
           ></v-text-field>
@@ -165,11 +163,14 @@ export default {
     selectLabels: [],
     selectIds: [],
     newReserve: {},
-    horario: ""
+    horario: "",
   }),
   computed: {
-    computedDateFormatted() {
+    computedDateFormatted1() {
       return this.formatDate(this.dateStart);
+    },
+    computedDateFormatted2() {
+      return this.formatDate(this.dateEnd);
     },
     numberErrors() {
       const errors = [];
@@ -182,12 +183,6 @@ export default {
       if (!this.$v.select.$dirty) return errors;
       !this.$v.select.required && errors.push("Tipo de serviço é obrigatorio");
       return errors;
-    },
-  },
-  watch: {
-    date() {
-      this.dateFormatted1 = this.formatDate(this.dateStart);
-      this.dateFormatted2 = this.formatDate(this.dateEnd);
     },
   },
   methods: {
