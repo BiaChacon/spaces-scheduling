@@ -57,13 +57,13 @@
         </v-list-item-content>
       </v-list-item>
       </v-list>
-
+<!-- @click.prevent="detailSpace(space.id)" -->
       <v-btn
-        @click.prevent="detailSpace(space.id)"
+        @click.prevent="click('detail-space',space)"
         icon
         :key="space.id"
       >
-        <v-icon color="indigo">mdi-plus</v-icon>
+        <v-icon color="indigo" >mdi-plus</v-icon>
       </v-btn>
  
       <v-divider 
@@ -89,6 +89,16 @@ export default {
   methods: {
     async detailSpace(id) {
       this.$router.push('detail-space', id);
+    },
+    navegateTo(where) {
+      this.$router.push({ name: where });
+    },
+
+    click(where, data) {
+      // this.$log.info("log1", data.id);
+      // this.$log.info("log2", where);
+
+      this.$router.push({ name: where, params: { space: data } });
     }
   }
 };
