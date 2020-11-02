@@ -29,6 +29,11 @@ const routes = [
     component: DetailSpace,
     props: true
   },
+  // {
+  //   path: '/reservas-espaco',
+  //   name: 'space-reservatios',
+  //   component: SpaceReservations
+  // },
   {
     path: '/ver-disponibilidade',
     name: 'check-availability',
@@ -54,11 +59,7 @@ const routes = [
     name: 'register-reservation-recurring',
     component: ReservationRecurring
   },
-  // {
-  //   path: '/reservas-espaco/:id',
-  //   name: 'space-reservatios',
-  //   component: SpaceReservations
-  // },
+  
 ]
 
 const router = new VueRouter({

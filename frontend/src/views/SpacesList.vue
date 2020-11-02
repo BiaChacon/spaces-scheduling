@@ -59,7 +59,7 @@
       </v-list>
 <!-- @click.prevent="detailSpace(space.id)" -->
       <v-btn
-        @click.prevent="click('detail-space',space)"
+        @click="click('detail-space',space)"
         icon
         :key="space.id"
       >

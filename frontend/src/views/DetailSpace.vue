@@ -1,19 +1,21 @@
 <template>
-  <div>{{space}}</div>
+  <div>
+    {{ space }}
+
+    <SpaceReservations :space_id="space.id" />
+  </div>
 </template>
 <script>
-// import ApiService from "../services/ApiService";
-// const http = new ApiService("spaces");
+
+import SpaceReservations from "../views/SpaceReservations.vue";
 
 export default {
   props: ["space"],
-  data: () => ({
-    space: { id: "", name: "" },
-  }),
-  async created() {
-    // let response = await http.getList("spaces");
-    // this.space = response.data[1];
+  data: () => ({}),
+  components: {
+    SpaceReservations,
   },
+  async created() {},
   methods: {},
 };
 </script>
