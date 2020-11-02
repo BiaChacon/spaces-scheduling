@@ -57,9 +57,9 @@
         </v-list-item-content>
       </v-list-item>
       </v-list>
-<!-- @click.prevent="detailSpace(space.id)" -->
+<!-- @sendToDetail.prevent="detailSpace(space.id)" -->
       <v-btn
-        @click="click('detail-space',space)"
+        @click="sendToDetail('detail-space',space)"
         icon
         :key="space.id"
       >
@@ -94,7 +94,7 @@ export default {
       this.$router.push({ name: where });
     },
 
-    click(where, data) {
+    sendToDetail(where, data) {
       // this.$log.info("log1", data.id);
       // this.$log.info("log2", where);
 
