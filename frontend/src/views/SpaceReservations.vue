@@ -3,9 +3,22 @@
     Reservas do espaço :
     <!-- <div v-if="space_id"> -->
     <!-- <strong>{{ space_id }} </strong> -->
-    <li v-for="reserve in spacesReserves" :key="reserve.id">
-      <ul>{{ reserve.justification }}</ul>
-    </li>
+    <div v-for="reserve in spacesReserves" :key="reserve.id">
+      <div v-if="reserve.normal">
+        <strong>Data da Reserva: </strong>
+        <span>{{ reserve.dateStart }}</span>
+      </div>
+      <div v-else>
+        <strong>Data Inicio: </strong>
+        <span>{{ reserve.dateStart }}</span>
+        <br />
+        <strong>Data Final: </strong>
+        <span>{{ reserve.dateEnd }}</span>
+      </div>
+      <div>{{ reserve.justification }}</div>
+      <div>horario {{ reserve.schedule }}</div>
+      <hr>
+    </div>
     <!-- </div> -->
   </div>
 </template>
@@ -26,7 +39,7 @@ export default {
       params: { spaceId: this.space_id },
     });
     window.console.log(result.data);
-    this.reserveList = result.data;
+    this.spacesReserves = result.data;
   },
 };
 </script>
