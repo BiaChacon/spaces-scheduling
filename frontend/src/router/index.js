@@ -8,6 +8,7 @@ import RegisterSpace from '../views/RegisterSpace';
 import ReservationList from '../views/ReservationList.vue';
 import ReservationNormal from '../views/RegisterReservationNormal.vue';
 import ReservationRecurring from '../views/RegisterReservationRecurring.vue';
+import SpaceReservations from '../views/SpaceReservations.vue';
 
 Vue.use(VueRouter);
 
@@ -23,7 +24,7 @@ const routes = [
     component: SpacesList
   },
   {
-  path: '/detalhes-espaco',
+  path: '/detalhes-espaco/:id',
   name: 'detail-space',
   component: DetailSpace
   },
@@ -52,6 +53,11 @@ const routes = [
     name: 'register-reservation-recurring',
     component: ReservationRecurring
   },
+  // {
+  //   path: '/reservas-espaco/:id',
+  //   name: 'space-reservatios',
+  //   component: SpaceReservations
+  // },
 ]
 
 const router = new VueRouter({
