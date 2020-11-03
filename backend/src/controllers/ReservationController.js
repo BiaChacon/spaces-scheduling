@@ -20,7 +20,7 @@ module.exports = {
   async reservationsBySpace(request, response) {
     const { spaceId } = request.query;
 
-    const reservations = await connection('reservations').select('*').where('spaceId', spaceId);
+    const reservations = await connection('reservations').select('*').where({'spaceId': spaceId, 'canceled': 0});
 
     return response.json(reservations);
   },
@@ -52,7 +52,7 @@ module.exports = {
         return response.status(400).send('Bad request! The end date of the recurring reservation must be after the start date!');
     }
     //get reservations for a space
-    const reservations = await connection('reservations').select('*').where('spaceId', spaceId);
+    const reservations = await connection('reservations').select('*').where({'spaceId': spaceId, 'canceled': false});
     //check if the date and time are available for a given space
     const available=availabilityCheck(normal,dateStart,dateEnd,schedule,reservations);
     if(available){

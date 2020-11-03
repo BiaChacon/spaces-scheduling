@@ -29,7 +29,7 @@ module.exports = {
         var reservations = [];
 
         for(let i=0; i<spaces.length; i++){
-            reservations = await connection('reservations').select('*').where('spaceId', spaces[i].id);
+            reservations = await connection('reservations').select('*').where({'spaceId': spaces[i].id, 'canceled': 0});
             if(availabilityCheck(true,date,date,schedule,reservations)){
                spacesAvailability.push(spaces[i]);
            }
