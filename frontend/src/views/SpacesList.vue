@@ -57,7 +57,7 @@
         </v-list-item-content>
       </v-list-item>
       </v-list>
-<!-- @sendToDetail.prevent="detailSpace(space.id)" -->
+
       <v-btn
         @click="sendToDetail('detail-space',space)"
         icon
@@ -65,7 +65,7 @@
       >
         <v-icon color="indigo" >mdi-plus</v-icon>
       </v-btn>
- 
+
       <v-divider 
         v-if="index < spaces.length - 1"
         :key="index">
@@ -95,9 +95,6 @@ export default {
     },
 
     sendToDetail(where, data) {
-      // this.$log.info("log1", data.id);
-      // this.$log.info("log2", where);
-
       this.$router.push({ name: where, params: { space: data } });
     }
   }

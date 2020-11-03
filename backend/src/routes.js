@@ -26,6 +26,7 @@ routes.post('/spaces', celebrate({
 }), SpaceController.create);
 
 routes.get('/reservations', ReservationController.index);
+routes.get('/reservations/:id', ReservationController.show);
 routes.get('/space-reservations', ReservationController.reservationsBySpace);
 
 routes.post('/register-reservation', celebrate({

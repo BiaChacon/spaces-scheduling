@@ -9,6 +9,14 @@ module.exports = {
     return response.json(reservations);
   },
 
+  async show(request, response) {
+    const {id} = request.params;
+
+    const reserve = await connection('reservations').select('*').where('id', id);
+
+    return response.json(reserve);
+  },
+
   async reservationsBySpace(request, response) {
     const { spaceId } = request.query;
 
