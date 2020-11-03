@@ -4,7 +4,7 @@
 
     <p>{{ space.description }}</p>
 
-    <span v-text=' space.special ? "Espaço Especial" : "Espaço Normal" '></span>
+    <p v-text=' space.special ? "Espaço Especial" : "Espaço Normal" '></p>
 
     <p v-text=' space.computers ? "Tem Computadores" : "Não tem computadores" '></p>
 
@@ -19,6 +19,16 @@
 
     <strong>Responsavel: </strong>
     <p>{{ space.responsible }}</p>
+
+    <v-btn
+      tile
+      color="success"
+    >
+      <v-icon left>
+        mdi-pencil
+      </v-icon>
+      Editar
+    </v-btn>
 
     <SpaceReservations :space_id="space.id" />
   </div>

@@ -58,14 +58,22 @@
       </v-list-item>
       </v-list>
 
-      <v-btn
-        @click="sendToDetail('detail-space',space)"
-        icon
+      <v-row 
+        align="center"
+        justify="space-around"
         :key="space.id"
       >
-        <v-icon color="indigo" >mdi-plus</v-icon>
-      </v-btn>
-
+        <v-btn
+          @click="sendToDetail('detail-space',space)"
+          :key="space.id"
+          tile
+          dark
+          color="indigo"
+        >
+          <v-icon left>mdi-plus</v-icon>
+          Detalhes
+        </v-btn>
+      </v-row>
       <v-divider 
         v-if="index < spaces.length - 1"
         :key="index">

@@ -1,7 +1,7 @@
 <template>
   <div>
     <div v-if="spacesReserves.length!==0">
-      <h3 class="black--text pl-0 pt-12">
+      <h3 class="black--text pl-0 pt-8">
         Reservas do Espaço:
       </h3>
     </div>
@@ -74,7 +74,7 @@
                       Data Fim:
                     </v-list-item-title>
                     <v-list-item-subtitle 
-                      v-text="reserve.dataEnd"
+                      v-text="reserve.dateEnd"
                     >
                     </v-list-item-subtitle>
                   </v-list-item-content>
@@ -100,10 +100,15 @@
 
           <v-btn
               @click="sendToDetail('detail-reserve',reserve)"
-              icon
               :key="reserve.id"
+              tile
+              dark
+              color="indigo"
             >
-              <v-icon color="indigo" >mdi-plus</v-icon>
+              <v-icon left>
+                mdi-plus
+              </v-icon>
+              Detalhes
             </v-btn>
 
             <v-divider 

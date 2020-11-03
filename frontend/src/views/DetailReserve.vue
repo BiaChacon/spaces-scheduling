@@ -3,7 +3,7 @@
     <h3>{{reserve.justification}}</h3>
     <p></p>
     <strong>Local: </strong>
-    <p>{{nameSpace(reserve.spaceId)}}</p>
+    <p>{{nameSpace()}}</p>
 
     <div v-if="reserve.normal">
       <strong>Data da reserva: </strong>
@@ -18,10 +18,24 @@
 
     <strong>Horário:</strong>
     <p>{{ reserve.schedule }}</p>
-
-    <b-button>Editar</b-button>
-    <p></p>
-    <b-button>Cancelar</b-button>
+    <v-btn
+      tile
+      color="success"
+    >
+      <v-icon left>
+        mdi-pencil
+      </v-icon>
+      Editar
+    </v-btn>
+    <v-btn
+      tile
+      color="error"
+    >
+      <v-icon left>
+        mdi-cancel 
+      </v-icon>
+      Cancelar
+    </v-btn>
   </div>
 </template>
 <script>
@@ -30,14 +44,16 @@ const http = new ApiService('spaces');
 
 export default {
   props: ["reserve"],
-  async created() {},
+  data: () => ({
+    space: [],
+  }),
+  async created() {
+    const result = await http.getOne(this.reserve.spaceId);
+    this.space = result.data;
+  },
   methods: {
-    async nameSpace(id) {
-      let response = await http.getOne(id);
-      let space = response.data;
-      const name = space[0].name
-      console.log(name);
-      return name;
+    nameSpace() {
+      return this.space[0].name;
     }
   },
 };
