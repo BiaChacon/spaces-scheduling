@@ -20,7 +20,8 @@
     <p>{{ reserve.schedule }}</p>
     <v-btn
       tile
-      color="success"
+      dark
+      color="blue"
     >
       <v-icon left>
         mdi-pencil
@@ -28,6 +29,7 @@
       Editar
     </v-btn>
     <v-btn
+      @click.prevent="cancel"
       tile
       color="error"
     >
@@ -54,6 +56,15 @@ export default {
   methods: {
     nameSpace() {
       return this.space[0].name;
+    },
+    async cancel(){
+      var r = confirm("Cancelar reserva?");
+      if (r == true) {
+        console.log(this.space[0].id);
+        this.$router.push('detail-space', this.space[0].id);
+      } else {
+        console.log("continua aqui");
+      }
     }
   },
 };

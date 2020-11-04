@@ -22,7 +22,8 @@
 
     <v-btn
       tile
-      color="success"
+      dark
+      color="blue"
     >
       <v-icon left>
         mdi-pencil
