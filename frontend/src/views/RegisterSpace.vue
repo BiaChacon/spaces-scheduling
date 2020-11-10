@@ -1,111 +1,100 @@
 <template>
-  <v-card max-width="1000" class="mx-auto">
-    <div id="formSpace">
-      <b-form @submit="onSubmit" @reset="onReset" v-if="show">
-        <b-form-group id="input-group-2" label="Nome:" label-for="input-2">
-          <b-form-input
+  <v-card class="mx-auto" max-width="500">
+    <v-card-title>Cadastre um espaço</v-card-title>
+   <v-card-text>
+        <v-form class="m-3" style="margin: 30px" v-model="isValid">
+          <v-text-field
             v-model="form.name"
+            label="Nome"
+            :rules="[v => !!v || 'is required']"
             required
-            placeholder="Nome"
-          ></b-form-input>
-        </b-form-group>
+            outlined
+          ></v-text-field>
 
-        <b-form-group id="input-group-2" label="Descrição:" label-for="input-2">
-          <b-form-input
+          <v-textarea
             v-model="form.description"
+            label="Descrição"
+            :rules="[v => !!v || 'is required']"
             required
-            placeholder="Descrição"
-          ></b-form-input>
-        </b-form-group>
+            auto-grow
+            outlined
+            rows="3"
+            row-height="25"
+          ></v-textarea>
 
-        <b-form-group
-          id="input-group-2"
-          label="Localização:"
-          label-for="input-2"
-        >
-          <b-form-input
+          <v-text-field
             v-model="form.localization"
+            label="Localização"
+            :rules="[v => !!v || 'is required']"
             required
-            placeholder="Localização"
-          ></b-form-input>
-        </b-form-group>
+            outlined
+          ></v-text-field>
 
-        <b-form-group
-          id="input-group-2"
-          label="Responsável:"
-          label-for="input-2"
-        >
-          <b-form-input
+          <v-text-field
             v-model="form.responsible"
+            label="Responsável"
+            :rules="[v => !!v || 'is required']"
             required
-            placeholder="Responsável"
-          ></b-form-input>
-        </b-form-group>
+            outlined
+          ></v-text-field>
 
-        <b-form-group
-          id="input-group-3"
-          label="Espaço especial:"
-          label-for="input-3"
-        >
-          <b-form-select
+          <v-select
             v-model="form.special"
-            :options="options"
+            :items="options"
+            item-text="label"
+            item-value="value"
+            label="Espaço especial"
             required
-          ></b-form-select>
-        </b-form-group>
+            outlined
+            @change="$v.select.$touch()"
+            @blur="$v.select.$touch()"
+          ></v-select>
 
-        <b-form-group
-          id="input-group-2"
-          label="Justificativa:"
-          label-for="input-2"
-        >
-          <b-form-input
+          <v-textarea
             v-model="form.justification"
+            label="Justificativa"
+            :rules="[v => !!v || 'is required']"
             required
-            placeholder="Justificativa"
-          ></b-form-input>
-        </b-form-group>
+            auto-grow
+            outlined
+            rows="3"
+            row-height="25"
+          ></v-textarea>
 
-        <b-form-group
-          id="input-group-3"
-          label="Computadores:"
-          label-for="input-3"
-        >
-          <b-form-select
+          <v-select
             v-model="form.computers"
-            :options="options2"
+            :items="options2"
+            item-text="label"
+            item-value="value"
+            label="Computadores"
+            :rules="[v => !!v || 'is required']"
             required
-          ></b-form-select>
-        </b-form-group>
+            outlined
+            @change="$v.select.$touch()"
+            @blur="$v.select.$touch()"
+          ></v-select>
 
-        <b-form-group
-          id="input-group-2"
-          label="Capacidade:"
-          label-for="input-2"
-        >
-          <b-form-input
+          <v-text-field
             v-model="form.qtdPeople"
+            label="Capacidade"
             required
-            placeholder="Capacidade"
             type="number"
-          ></b-form-input>
-        </b-form-group>
+            outlined
+          ></v-text-field>
 
-        <b-form-group id="input-group-2" label="Ramal:" label-for="input-2">
-          <b-form-input
-            id="input-2"
+          <v-text-field
             v-model="form.extension"
+            label="Ramal"
+            :rules="[v => !!v || 'is required']"
             required
-            placeholder="Ramal"
             type="number"
-          ></b-form-input>
-        </b-form-group>
-
-        <b-button type="submit" variant="primary" id="btnRegister"
-          >Cadastrar</b-button
-        >
-      </b-form>
-    </div>
+            outlined
+          ></v-text-field>
+        </v-form> 
+        <v-card-actions class="justify-center">
+          <v-btn :disabled="!isValid" style="width: 250px" large rounded dark color="success" @click.prevent="submit">Cadastrar</v-btn>
+        </v-card-actions>
+      </v-card-text>
   </v-card>
 </template>
 
@@ -128,20 +117,19 @@ export default {
         extension: "",
       },
       options: [
-        { text: "Select One", value: null },
-        { text: "Sim", value: true },
-        { text: "Não", value: false },
+        { 'label': "Sim", 'value': "true" },
+        { 'label': "Não", 'value': "false" },
       ],
       options2: [
-        { text: "Select One", value: null },
-        { text: "Sim", value: true },
-        { text: "Não", value: false },
+        { 'label': "Sim", 'value': "true" },
+        { 'label': "Não", 'value': "false" },
       ],
       show: true,
+      isValid: true,
     };
   },
   methods: {
-    onSubmit(evt) {
+    async submit(evt) {
       evt.preventDefault();
       http.create(this.form);
       alert("Espaço salvo");
