@@ -11,7 +11,7 @@ routes.get('/spaces/:id', SpaceController.show);
 routes.get('/check-availability', SpaceController.availability);
 
 routes.post('/spaces', celebrate({
-     [Segments.BODY]: Joi.object().keys({
+    [Segments.BODY]: Joi.object().keys({
         name: Joi.string().required(),
         description: Joi.string().required(),
         localization: Joi.string().required(),
@@ -28,6 +28,8 @@ routes.post('/spaces', celebrate({
 routes.get('/reservations', ReservationController.index);
 routes.get('/reservations/:id', ReservationController.show);
 routes.get('/space-reservations', ReservationController.reservationsBySpace);
+
+routes.put('/reservation-cancel/:id', ReservationController.reservationCancel);
 
 routes.post('/register-reservation', celebrate({
     [Segments.BODY]: Joi.object().keys({

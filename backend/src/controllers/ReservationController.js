@@ -17,6 +17,23 @@ module.exports = {
     return response.json(reserve);
   },
 
+  async reservationCancel(request, response) {
+    const {id} = request.params;
+
+    const reservation = await connection('reservations')
+      .select('id')
+      .where('id', id)
+      .then(([row]) => {
+        if (!row) {
+        return response.status(400).send("do not exist")
+      }
+      return connection('reservations')
+        .update('canceled', 1)
+        .where('id', row.id)
+    });
+    return response.status(200).send("Reservation caceled");
+  },
+
   async reservationsBySpace(request, response) {
     const { spaceId } = request.query;
 
@@ -52,7 +69,7 @@ module.exports = {
         return response.status(400).send('Bad request! The end date of the recurring reservation must be after the start date!');
     }
     //get reservations for a space
-    const reservations = await connection('reservations').select('*').where({'spaceId': spaceId, 'canceled': false});
+    const reservations = await connection('reservations').select('*').where({'spaceId': spaceId, 'canceled': 0});
     //check if the date and time are available for a given space
     const available=availabilityCheck(normal,dateStart,dateEnd,schedule,reservations);
     if(available){

@@ -18,7 +18,7 @@
 
     <strong>Horário:</strong>
     <p>{{ reserve.schedule }}</p>
-    <v-btn
+    <!-- <v-btn
       tile
       dark
       color="blue"
@@ -27,7 +27,7 @@
         mdi-pencil
       </v-icon>
       Editar
-    </v-btn>
+    </v-btn> -->
     <v-btn
       @click.prevent="cancel"
       tile
@@ -43,6 +43,7 @@
 <script>
 import ApiService from '../services/ApiService';
 const http = new ApiService('spaces');
+import axiosConf from "../services/config";
 
 export default {
   props: ["reserve"],
@@ -60,6 +61,7 @@ export default {
     async cancel(){
       var r = confirm("Cancelar reserva?");
       if (r == true) {
+        await axiosConf.put(`/reservation-cancel/${this.reserve.id}`);
         console.log(this.space[0].id);
         this.$router.push('detail-space', this.space[0].id);
       } else {
