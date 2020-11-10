@@ -1,73 +1,77 @@
 <template>
   <v-card class="mx-auto" max-width="500">
-    <v-card-title>Reserve uma sala</v-card-title>
-    <v-form class="m-3" style="margin: 30px">
-      <v-select
-        class="m-2"
-        v-model="selected"
-        :items="selectLabels"
-        label="Espaços"
-        required
-        @change="$v.select.$touch()"
-        @blur="$v.select.$touch()"
-      ></v-select>
-      <v-textarea
-        label="Justificativa"
-        auto-grow
-        outlined
-        rows="3"
-        row-height="25"
-        shaped
-        v-model="justification"
-      ></v-textarea>
+    <v-card-title>Reserve um espaço</v-card-title>
+      <v-card-text>
+        <v-form class="m-3" style="margin: 30px" v-model="isValid">
+          <v-select
+            v-model="selected"
+            :items="selectLabels"
+            label="Espaços"
+            :rules="[v => !!v || 'is required']"
+            required
+            outlined
+            @change="$v.select.$touch()"
+            @blur="$v.select.$touch()"
+          ></v-select>
 
-      <v-menu
-        ref="menu1"
-        v-model="menu1"
-        :close-on-content-click="false"
-        transition="scale-transition"
-        offset-y
-        full-width
-        max-width="290px"
-        min-width="290px"
-      >
-        <template v-slot:activator="{ on }">
-          <v-text-field
-            v-model="dateFormatted"
-            label="Data"
-            hint="DD/MM/AAAA"
-            persistent-hint
-            @blur="date = parseDate(dateFormatted)"
-            v-on="on"
-            class="m-2"
-          ></v-text-field>
-        </template>
-        <v-date-picker
-          v-model="date"
-          no-title
-          @input="menu1 = false"
-        ></v-date-picker>
-      </v-menu>
-      <p class="text-left">Selecione o horario:</p>
-      <v-checkbox v-model="checkState[0]" :label="schedular[0]"></v-checkbox>
-      <v-checkbox v-model="checkState[1]" :label="schedular[1]"></v-checkbox>
-      <v-checkbox v-model="checkState[2]" :label="schedular[2]"></v-checkbox>
-      <v-checkbox v-model="checkState[3]" :label="schedular[3]"></v-checkbox>
-      <v-checkbox v-model="checkState[4]" :label="schedular[4]"></v-checkbox>
-      <v-checkbox v-model="checkState[5]" :label="schedular[5]"></v-checkbox>
-      <v-checkbox v-model="checkState[6]" :label="schedular[6]"></v-checkbox>
-      <v-checkbox v-model="checkState[7]" :label="schedular[7]"></v-checkbox>
-      <v-checkbox v-model="checkState[8]" :label="schedular[8]"></v-checkbox>
-      <v-checkbox v-model="checkState[9]" :label="schedular[9]"></v-checkbox>
+          <v-textarea
+            label="Reserva para..."
+            auto-grow
+            outlined
+            rows="3"
+            row-height="25"
+            v-model="justification"
+            :rules="[v => !!v || 'is required']"
+            required
+          ></v-textarea>
 
-      <v-checkbox
-        v-model="h2"
-        :label="schedular[10]"
-        value="Jacob"
-      ></v-checkbox>
-      <v-btn class="m-2" @click.prevent="submit">Salvar</v-btn>
-      <v-btn class="m-2" @click.prevent="clear">Limpar Campos</v-btn>
-    </v-form>
+          <v-menu
+            ref="menu1"
+            v-model="menu1"
+            :close-on-content-click="false"
+            transition="scale-transition"
+            offset-y
+            full-width
+            max-width="290px"
+            min-width="290px"
+          >
+            <template v-slot:activator="{ on }">
+              <v-text-field 
+                v-mask="'##/##/####'"
+                v-model="dateFormatted"
+                :rules="[v => !!v || 'is required']"
+                required
+                label="Data"
+                outlined
+                hint="DD/MM/AAAA"
+                @blur="date = parseDate(dateFormatted)"
+                v-on="on"
+              ></v-text-field>
+            </template>
+            <v-date-picker
+              v-model="date"
+              no-title
+              @input="menu1 = false"
+            ></v-date-picker>
+          </v-menu>
+
+          <v-select
+            v-model="checkState"
+            :items="schedular"
+            item-text="label"
+            item-value="value"
+            required
+            :rules="[(v) => !!v || 'is required']"
+            chips
+            label="Horário"
+            multiple
+            outlined
+          ></v-select>
+        </v-form> 
+        <v-card-actions class="justify-center">
+          <v-btn :disabled="!isValid" style="width: 250px" large rounded dark color="success" @click.prevent="submit">Cadastrar</v-btn>
+        </v-card-actions>
+      </v-card-text>
   </v-card>
 </template>
 <style scoped>
@@ -79,31 +83,19 @@ const http = new ApiService("spaces");
 export default {
   data: () => ({
     schedular: [
-      "07:00-07:50",
-      "07:50-08:40",
-      "08:55-09:45",
-      "09:45-10:35",
-      "10:50-11:40",
-      "11:40-12:30",
-      "13:00-13:50",
-      "13:50-15:40",
-      "14:55-15:45",
-      "16:50-17:40",
-      "17:40-18:30",
+      {'label' : "07:00-07:50", 'value' : "1"},
+      {'label' : "07:50-08:40", 'value' : "2"},
+      {'label' : "08:55-09:45", 'value' : "3"},
+      {'label' : "09:45-10:35", 'value' : "4"},
+      {'label' : "10:50-11:40", 'value' : "5"},
+      {'label' : "11:40-12:30", 'value' : "6"},
+      {'label' : "13:00-13:50", 'value' : "7"},
+      {'label' : "13:50-15:40", 'value' : "8"},
+      {'label' : "14:55-15:45", 'value' : "9"},
+      {'label' : "16:50-17:40", 'value' : "10"},
+      {'label' : "17:40-18:30", 'value' : "11"},
     ],
-    checkState: [
-      false,
-      false,
-      false,
-      false,
-      false,
-      false,
-      false,
-      false,
-      false,
-      false,
-      false,
-    ],
+    checkState: '',
     spaces: [],
     time: null,
     menu2: false,
@@ -117,6 +109,7 @@ export default {
     selectIds: [],
     newReserve: {},
     horario: "",
+    isValid: true,
   }),
   computed: {
     computedDateFormatted() {
@@ -150,10 +143,9 @@ export default {
       const api = new ApiService("register-reservation");
       let hour = "";
 
-      /** scrolls through the list of checkboxes and generates a string
-       * concatenating the index of all those that are marked + 1 **/
-      this.checkState.map((state, index) => {
-        state === true ? (hour += `${index + 1},`) : (hour += "");
+      this.checkState.sort();
+      this.checkState.map((state) => {
+        hour += (`${state},`);
       });
       window.console.log(hour);
       let day = new Date(this.date);
@@ -180,20 +172,8 @@ export default {
     },
     clear() {
       this.justification = "";
-      (this.checkState = [
-        false,
-        false,
-        false,
-        false,
-        false,
-        false,
-        false,
-        false,
-        false,
-        false,
-        false,
-      ]),
-        (this.date = "");
+      this.checkState = "";
+      this.date = "";
       this.selected = "";
     },
   },

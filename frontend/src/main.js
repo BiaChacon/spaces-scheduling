@@ -14,6 +14,9 @@ import 'bootstrap-vue/dist/bootstrap-vue.css'
 import vuetify from './plugins/vuetify';
 Vue.config.productionTip = false
 
+import { VueMaskDirective } from 'v-mask'
+Vue.directive('mask', VueMaskDirective);
+
 new Vue({
   router,
   store,
