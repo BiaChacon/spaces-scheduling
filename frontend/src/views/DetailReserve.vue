@@ -62,8 +62,7 @@ export default {
       var r = confirm("Cancelar reserva?");
       if (r == true) {
         await axiosConf.put(`/reservation-cancel/${this.reserve.id}`);
-        console.log(this.space[0].id);
-        this.$router.push('detail-space', this.space[0].id);
+        this.$router.push('/');
       } else {
         console.log("continua aqui");
       }
