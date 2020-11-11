@@ -20,7 +20,7 @@
     <strong>Responsavel: </strong>
     <p>{{ space.responsible }}</p>
 
-    <v-btn
+    <!-- <v-btn
       tile
       dark
       color="blue"
@@ -29,9 +29,8 @@
         mdi-pencil
       </v-icon>
       Editar
-    </v-btn>
+    </v-btn> -->
 
-    <SpaceReservations :space_id="space.id" />
     <v-row class="fill-height">
       <v-col>
         <v-sheet height="64">
@@ -163,6 +162,9 @@
         </v-sheet>
       </v-col>
     </v-row>
+
+
+    <SpaceReservations :space_id="space.id" />
   </div>
 </template>
 <script>
