@@ -63,8 +63,8 @@
             ></v-select>
 
             <v-card-actions class="justify-center">
-              <v-btn style="width: 150px" large rounded dark color="blue" @click.prevent="clear">Limpar</v-btn>
-              <v-btn style="width: 150px" large rounded dark color="orange" @click.prevent="check">Checar</v-btn>
+              <v-btn style="width: 120px" large rounded dark color="blue" @click.prevent="clear">Limpar</v-btn>
+              <v-btn style="width: 120px" large rounded dark color="orange" @click.prevent="check">Checar</v-btn>
             </v-card-actions>
           </v-card>
         </v-col>
@@ -158,8 +158,9 @@
 </template>
 
 <script>
-import ApiService from '../services/ApiService';
-const http = new ApiService('spaces');
+// import ApiService from '../services/ApiService';
+// const http = new ApiService('spaces');
+import axios from "axios";
 
 export default {
   data: () => ({
@@ -179,8 +180,8 @@ export default {
       {'label' : "17:40-18:30", 'value' : "11"},
     ],
     computers: [
-      { 'label': "Sim", 'value': "true" },
-      { 'label': "Não", 'value': "false" },
+      { 'label': "Sim", 'value': "1" },
+      { 'label': "Não", 'value': "0" },
     ],
     checkComputers: '',
     checkSchedular: '',
@@ -196,10 +197,10 @@ export default {
       this.dateFormatted = this.formatDate(this.date);
     },
   },
-  async created() {
-    let response = await http.getList('spaces');
-    this.spaces = response.data;
-  },
+  // async created() {
+  //   let response = await http.getList('spaces');
+  //   this.spaces = response.data;
+  // },
   methods: {
     formatDate(date) {
       if (!date) return null;
@@ -212,7 +213,6 @@ export default {
     navegateTo(where) {
       this.$router.push({ name: where });
     },
-
     sendToDetail(where, data) {
       this.$router.push({ name: where, params: { space: data } });
     },
@@ -220,9 +220,25 @@ export default {
       this.date = "";
       this.checkComputers = "";
       this.checkSchedular = "";
+      // let response = await http.getList('spaces');
+      this.spaces = [];
+      // this.spaces = response.data;
     },
-    check() {
-
+    async check() {
+      let hours = "";
+      this.checkSchedular.sort();
+      this.checkSchedular.map((state) => {
+        hours += (`${state},`);
+      });
+      hours = hours.substring(0, hours.length - 1);
+      console.log(hours);
+      console.log(this.checkComputers);
+      console.log(this.date);
+      const response = await axios.get(`http://localhost:3333/check-availability/?computers=${this.checkComputers}&date=${this.date}&hours=${hours}`);
+      this.spaces = [];
+      console.log(response.data);
+      this.spaces = response.data;
+      console.log(this.spaces);
     }
   }
 };
