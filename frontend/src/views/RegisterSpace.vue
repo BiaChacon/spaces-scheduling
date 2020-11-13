@@ -164,7 +164,7 @@ export default {
     },
   },
   created() {
-    this.$store.commit("setTitle", "Criação de Espaço");
+    this.$store.commit("setTitle", "Cadastro de Espaço");
   },
 };
 </script>

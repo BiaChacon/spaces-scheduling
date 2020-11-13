@@ -61,11 +61,11 @@ export default {
     return {
       drawer: true,
       items: [
-        { title: "Home", page:"Espaços", icon: "mdi-home", to: "home" },
-        { title: "Ver disponibilidade", page:"Ver disponibilidade", icon: "mdi-home", to: "check-availability" },
-        { title: "Cadastrar Reserva Normal", page:"Cadastro de Reserva Normal", icon: "mdi-home", to: "register-reservation-normal" },
-        { title: "Cadastrar Reserva Recorrente", page:"Cadastro de Reserva Recorrente", icon: "mdi-home", to: "register-reservation-recurring" },
-        { title: "Cadastrar Espaço", page:"Cadastro de Espaço", icon: "mdi-home", to: "register-space" },
+        { title: "Espaços", page:"Espaços", icon: "mdi-home-city-outline", to: "home" },
+        { title: "Ver disponibilidade", page:"Ver disponibilidade", icon: "mdi-calendar-search ", to: "check-availability" },
+        { title: "Cadastrar Reserva Normal", page:"Cadastro de Reserva Normal", icon: "mdi-calendar-plus", to: "register-reservation-normal" },
+        { title: "Cadastrar Reserva Recorrente", page:"Cadastro de Reserva Recorrente", icon: "mdi-calendar-plus", to: "register-reservation-recurring" },
+        { title: "Cadastrar Espaço", page:"Cadastro de Espaço", icon: "mdi-home-plus", to: "register-space" },
       ],
       namePage: "Espaços",
     };

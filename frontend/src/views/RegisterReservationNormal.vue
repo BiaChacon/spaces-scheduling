@@ -185,7 +185,7 @@ export default {
       this.selectLabels.push(item.name);
       this.selectIds.push(item.id);
     });
-    this.$store.commit("setTitle", "Reserva Normal");
+    this.$store.commit("setTitle", "Cadastro de Reserva Normal");
 
   },
 };

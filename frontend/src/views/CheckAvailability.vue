@@ -188,7 +188,7 @@ export default {
     },
   },
   created() {
-    this.$store.commit("setTitle", "Disponibilidade");
+    this.$store.commit("setTitle", "Ver disponibilidade");
   },
   methods: {
     formatDate(date) {
