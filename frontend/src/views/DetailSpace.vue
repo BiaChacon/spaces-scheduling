@@ -7,7 +7,13 @@
       style="margin-bottom: 50px"
     >
 
-      <v-card-title class="mx-5" style="font-size:3em; color:#0077c2">{{ space.name }}</v-card-title>
+      <v-card-title
+        disabled="true"
+        class="mx-5" 
+        style="font-size:3em; color:#0077c2"
+      >
+        {{ space.name }}
+      </v-card-title>
 
       <v-card-text>
       <v-list color="#fff" disabled="true">
