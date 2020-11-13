@@ -88,10 +88,8 @@
             <v-row align="center" justify="center">
               <v-btn
                 @click="sendToDetail('detail-reserve',reserve)"
-                :key="reserve.id"
-                outlined
                 rounded
-                text
+                small
                 dark
                 color="blue"
               >
