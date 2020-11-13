@@ -93,6 +93,7 @@ export default {
   async created() {
     let response = await http.getList('spaces');
     this.spaces = response.data;
+    this.$store.commit('setTitle', "Espaços")
   },
   methods: {
     async detailSpace(id) {

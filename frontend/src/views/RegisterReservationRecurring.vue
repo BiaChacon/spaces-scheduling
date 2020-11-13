@@ -244,6 +244,8 @@ export default {
       this.selectLabels.push(item.name);
       this.selectIds.push(item.id);
     });
+    this.$store.commit("setTitle", "Reserva Recorrente");
+
   },
 };
 </script>

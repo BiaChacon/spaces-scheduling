@@ -134,6 +134,7 @@ export default {
       params: { spaceId: this.space_id },
     });
     this.spacesReserves = result.data;
+
   },
   methods: {
     async detailReserve(id) {

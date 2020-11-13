@@ -1,19 +1,9 @@
 <template>
   <div>
-    <v-container
-      class="grey lighten-5 mb-6"
-    >
-      <v-row
-        :align="align"
-        no-gutters
-        style="height: 150px;"
-      >
+    <v-container class="grey lighten-5 mb-6">
+      <v-row :align="align" no-gutters style="height: 150px">
         <v-col>
-          <v-card
-            class="pa-2"
-            outlined
-            tile
-          >
+          <v-card class="pa-2" outlined tile>
             <v-menu
               ref="menu1"
               v-model="menu1"
@@ -25,7 +15,7 @@
               min-width="290px"
             >
               <template v-slot:activator="{ on }">
-                <v-text-field 
+                <v-text-field
                   v-mask="'##/##/####'"
                   v-model="dateFormatted"
                   label="Data"
@@ -63,22 +53,34 @@
             ></v-select>
 
             <v-card-actions class="justify-center">
-              <v-btn style="width: 120px" large rounded dark color="blue" @click.prevent="clear">Limpar</v-btn>
-              <v-btn style="width: 120px" large rounded dark color="orange" @click.prevent="check">Checar</v-btn>
+              <v-btn
+                style="width: 120px"
+                large
+                rounded
+                dark
+                color="blue"
+                @click.prevent="clear"
+                >Limpar</v-btn
+              >
+              <v-btn
+                style="width: 120px"
+                large
+                rounded
+                dark
+                color="orange"
+                @click.prevent="check"
+                >Checar</v-btn
+              >
             </v-card-actions>
           </v-card>
         </v-col>
 
         <v-col>
-          <v-card
-            width="1400px" 
-            class="mx-auto"
-          >
+          <v-card width="1400px" class="mx-auto">
             <template v-for="(space, index) in spaces">
-
-              <v-card-title 
+              <v-card-title
                 v-text="space.name"
-                :key="space.id" 
+                :key="space.id"
                 class="black--text pl-12 pt-12"
               >
               </v-card-title>
@@ -86,24 +88,20 @@
               <v-list :key="space.id" disabled="true">
                 <v-list-item>
                   <v-list-item-icon>
-                    <v-icon color="indigo">
-                      mdi-map-marker
-                    </v-icon>
+                    <v-icon color="indigo"> mdi-map-marker </v-icon>
                   </v-list-item-icon>
                   <v-list-item-content>
-                    <v-list-item-title 
-                      v-text="space.localization"
-                    >
+                    <v-list-item-title v-text="space.localization">
                     </v-list-item-title>
-                    <v-list-item-subtitle>Escola Agrícola Jundiaí</v-list-item-subtitle>
+                    <v-list-item-subtitle
+                      >Escola Agrícola Jundiaí</v-list-item-subtitle
+                    >
                   </v-list-item-content>
                 </v-list-item>
 
                 <v-list-item>
                   <v-list-item-icon>
-                    <v-icon color="indigo">
-                      mdi-account-group
-                    </v-icon>
+                    <v-icon color="indigo"> mdi-account-group </v-icon>
                   </v-list-item-icon>
 
                   <v-list-item-content>
@@ -116,26 +114,20 @@
 
                 <v-list-item>
                   <v-list-item-icon>
-                    <v-icon color="indigo">
-                      mdi-laptop
-                    </v-icon>
+                    <v-icon color="indigo"> mdi-laptop </v-icon>
                   </v-list-item-icon>
                   <v-list-item-content>
                     <v-list-item-title
-                      v-text=' space.computers ? "SIM" : "NÃO" '
+                      v-text="space.computers ? 'SIM' : 'NÃO'"
                     ></v-list-item-title>
                     <v-list-item-subtitle>Computadores</v-list-item-subtitle>
                   </v-list-item-content>
                 </v-list-item>
               </v-list>
 
-              <v-row 
-                align="center"
-                justify="space-around"
-                :key="space.id"
-              >
+              <v-row align="center" justify="space-around" :key="space.id">
                 <v-btn
-                  @click="sendToDetail('detail-space',space)"
+                  @click="sendToDetail('detail-space', space)"
                   :key="space.id"
                   tile
                   dark
@@ -145,9 +137,7 @@
                   Detalhes
                 </v-btn>
               </v-row>
-              <v-divider 
-                v-if="index < spaces.length - 1"
-                :key="index">
+              <v-divider v-if="index < spaces.length - 1" :key="index">
               </v-divider>
             </template>
           </v-card>
@@ -167,24 +157,24 @@ export default {
     spaces: [],
     date: new Date().toISOString().substr(0, 10),
     schedular: [
-      {'label' : "07:00-07:50", 'value' : "1"},
-      {'label' : "07:50-08:40", 'value' : "2"},
-      {'label' : "08:55-09:45", 'value' : "3"},
-      {'label' : "09:45-10:35", 'value' : "4"},
-      {'label' : "10:50-11:40", 'value' : "5"},
-      {'label' : "11:40-12:30", 'value' : "6"},
-      {'label' : "13:00-13:50", 'value' : "7"},
-      {'label' : "13:50-15:40", 'value' : "8"},
-      {'label' : "14:55-15:45", 'value' : "9"},
-      {'label' : "16:50-17:40", 'value' : "10"},
-      {'label' : "17:40-18:30", 'value' : "11"},
+      { label: "07:00-07:50", value: "1" },
+      { label: "07:50-08:40", value: "2" },
+      { label: "08:55-09:45", value: "3" },
+      { label: "09:45-10:35", value: "4" },
+      { label: "10:50-11:40", value: "5" },
+      { label: "11:40-12:30", value: "6" },
+      { label: "13:00-13:50", value: "7" },
+      { label: "13:50-15:40", value: "8" },
+      { label: "14:55-15:45", value: "9" },
+      { label: "16:50-17:40", value: "10" },
+      { label: "17:40-18:30", value: "11" },
     ],
     computers: [
-      { 'label': "Sim", 'value': "1" },
-      { 'label': "Não", 'value': "0" },
+      { label: "Sim", value: "1" },
+      { label: "Não", value: "0" },
     ],
-    checkComputers: '',
-    checkSchedular: '',
+    checkComputers: "",
+    checkSchedular: "",
     menu1: false,
   }),
   computed: {
@@ -197,10 +187,9 @@ export default {
       this.dateFormatted = this.formatDate(this.date);
     },
   },
-  // async created() {
-  //   let response = await http.getList('spaces');
-  //   this.spaces = response.data;
-  // },
+  created() {
+    this.$store.commit("setTitle", "Disponibilidade");
+  },
   methods: {
     formatDate(date) {
       if (!date) return null;
@@ -208,7 +197,7 @@ export default {
       return `${day}/${month}/${year}`;
     },
     async detailSpace(id) {
-      this.$router.push('detail-space', id);
+      this.$router.push("detail-space", id);
     },
     navegateTo(where) {
       this.$router.push({ name: where });
@@ -228,19 +217,21 @@ export default {
       let hours = "";
       this.checkSchedular.sort();
       this.checkSchedular.map((state) => {
-        hours += (`${state},`);
+        hours += `${state},`;
       });
       hours = hours.substring(0, hours.length - 1);
       console.log(hours);
       console.log(this.checkComputers);
       console.log(this.date);
-      const response = await axios.get(`http://localhost:3333/check-availability/?computers=${this.checkComputers}&date=${this.date}&hours=${hours}`);
+      const response = await axios.get(
+        `http://localhost:3333/check-availability/?computers=${this.checkComputers}&date=${this.date}&hours=${hours}`
+      );
       this.spaces = [];
       console.log(response.data);
       this.spaces = response.data;
       console.log(this.spaces);
-    }
-  }
+    },
+  },
 };
 </script>
 <style lang="stylus" scoped></style>

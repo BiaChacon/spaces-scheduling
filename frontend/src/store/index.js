@@ -5,11 +5,17 @@ Vue.use(Vuex)
 
 export default new Vuex.Store({
   state: {
+    titlePage: ""
   },
   mutations: {
+    setTitle(state, payload) {
+      state.titlePage = payload;
+    }
   },
   actions: {
+
   },
-  modules: {
+  getters: {
+    titlePage: state => state.titlePage
   }
 })

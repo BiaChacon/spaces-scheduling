@@ -8,7 +8,7 @@
         dark
       >
       <v-app-bar-nav-icon dark @click.stop="drawer = !drawer"></v-app-bar-nav-icon>
-      <v-toolbar-title dark class="text-center">{{namePage}}</v-toolbar-title>
+      <v-toolbar-title dark class="text-center">{{$store.getters.titlePage}}</v-toolbar-title>
       <div class="flex-grow-1"></div>
       <v-btn icon>
         <!-- <v-icon>exit_to_app</v-icon> -->

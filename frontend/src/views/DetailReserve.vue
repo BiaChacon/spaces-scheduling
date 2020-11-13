@@ -53,6 +53,8 @@ export default {
   async created() {
     const result = await http.getOne(this.reserve.spaceId);
     this.space = result.data;
+    this.$store.commit("setTitle", "Detalhe Reserva");
+    
   },
   methods: {
     nameSpace() {

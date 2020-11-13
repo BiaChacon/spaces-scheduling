@@ -279,6 +279,8 @@ export default {
   },
   async created() {
     console.log(this.space);
+    this.$store.commit("setTitle", "Espaço");
+
   },
   data: () => ({
       focus: '',
