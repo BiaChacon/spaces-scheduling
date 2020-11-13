@@ -1,6 +1,5 @@
 <template>
   <v-card class="mx-auto" max-width="500">
-    <v-card-title>Cadastre um espaço</v-card-title>
    <v-card-text>
         <v-form class="m-3" style="margin: 30px" v-model="isValid">
           <v-text-field

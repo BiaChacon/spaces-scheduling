@@ -2,7 +2,7 @@
   <div>
     <div v-if="spacesReserves.length!==0">
       <h3 class="black--text pl-0 pt-8">
-        Reservas do Espaço:
+        Lista de Reservas do Espaço:
       </h3>
     </div>
 

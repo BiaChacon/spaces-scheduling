@@ -24,6 +24,7 @@
       app
       color="#0091EA" 
       dark
+      width="270"
     >
       <v-list dense>
         <v-list-item>
@@ -62,9 +63,9 @@ export default {
       items: [
         { title: "Home", page:"Espaços", icon: "mdi-home", to: "home" },
         { title: "Ver disponibilidade", page:"Ver disponibilidade", icon: "mdi-home", to: "check-availability" },
+        { title: "Cadastrar Reserva Normal", page:"Cadastro de Reserva Normal", icon: "mdi-home", to: "register-reservation-normal" },
+        { title: "Cadastrar Reserva Recorrente", page:"Cadastro de Reserva Recorrente", icon: "mdi-home", to: "register-reservation-recurring" },
         { title: "Cadastrar Espaço", page:"Cadastro de Espaço", icon: "mdi-home", to: "register-space" },
-        { title: "Cadastrar Reservar Normal", page:"Cadastro Reservar Normal", icon: "mdi-home", to: "register-reservation-normal" },
-        { title: "Cadastrar Reservar Recorrente", page:"Cadastro Reservar Recorrente", icon: "mdi-home", to: "register-reservation-recurring" },
       ],
       namePage: "Espaços",
     };
