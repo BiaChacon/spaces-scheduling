@@ -71,11 +71,9 @@
                 </v-list-item>
               </div>
               <div v-else>
-                <!-- FAZER  -->
-                <!-- Mostrar só os horários -->
                 <v-list-item>
                   <v-list-item-icon>
-                    <v-icon color="blue"> mdi-clock-outline </v-icon>
+                    <v-icon color="blue"> mdi-calendar-clock </v-icon>
                   </v-list-item-icon>
                   <v-list-item-content>
                     <v-list-item-title> {{ formatDayWeek(reserve.schedule) }} </v-list-item-title>
