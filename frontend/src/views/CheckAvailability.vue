@@ -1,7 +1,7 @@
 <template>
   <div>
     <v-container class="grey lighten-5 mb-6">
-      <v-row :align="align" no-gutters style="height: 150px">
+      <v-row no-gutters style="height: 150px">
         <v-col>
           <v-card class="pa-2" outlined tile>
             <v-menu
@@ -21,7 +21,6 @@
                   label="Data"
                   outlined
                   hint="DD/MM/AAAA"
-                  @blur="date = parseDate(dateFormatted)"
                   v-on="on"
                 ></v-text-field>
               </template>
@@ -81,13 +80,12 @@
               <v-card-title
                 v-text="space.name"
                 :key="space.id"
-                disabled="true"
                 class="mx-5"
                 style="font-size: 2em; color: #0077c2"
               >
               </v-card-title>
               <v-card-text :key="space.id">
-                <v-list :key="space.id" disabled="true">
+                <v-list :key="space.id">
                   <v-list-item>
                     <v-list-item-icon>
                       <v-icon color="blue"> mdi-map-marker </v-icon>
@@ -126,7 +124,7 @@
                 </v-list>
               </v-card-text>
               <v-card-actions :key="space.id">
-                <v-row align="center" justify="space-around">
+                <v-row justify="space-around">
                   <v-btn
                     @click="sendToDetail('detail-space', space)"
                     rounded
