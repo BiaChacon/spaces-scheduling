@@ -273,15 +273,20 @@
 
 
     <SpaceReservations :space_id="space.id" />
+    <Calendar :space_id="space.id" />
+
   </div>
 </template>
 <script>
 import SpaceReservations from "../views/SpaceReservations.vue";
+import Calendar from "../views/Calendar.vue";
+
 
 export default {
   props: ["space"],
   components: {
     SpaceReservations,
+    Calendar
   },
   async created() {
     console.log(this.space);
