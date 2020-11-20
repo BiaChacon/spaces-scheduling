@@ -236,7 +236,7 @@ export default {
       "grey darken-1",
     ],
   }),
-  async created() {
+  async mounted() {
     this.getEvents();
   },
   computed: {
@@ -287,16 +287,18 @@ export default {
       let events = [];
       let reserves = [];
       reserves = result.data;
+      window.console.log(reserves);
       reserves.forEach((res) => {
-        let obj = res;
-        obj.start = res.dateStart;
-        obj.end = res.dataEnd;
-        obj.color = this.colors[this.rnd(0, this.colors.length - 1)];
-        events.push(obj);
+        events.push({
+          name: "Evento da massa",
+          start: new Date(res.dateStart),
+          end: new Date(res.dataEnd),
+          color: this.colors[this.rnd(0, this.colors.length - 1)],
+          timed: true,
+        });
       });
       this.events = events;
       window.console.log(this.events);
-
     },
     setDialogDate({ date }) {
       this.dialogDate = true;
