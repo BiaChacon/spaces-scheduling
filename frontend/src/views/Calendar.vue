@@ -157,14 +157,16 @@ export default {
       const inicio = new Date(`${res.dateStart}T${schedularStart}`);
       const fim = new Date(`${res.dateEnd}T${schedularEnd}`);
 
-      eventos.push({
-        name: res.justification,
-        start: inicio,
-        end: fim,
-        color: res.normal ? this.colors[0] : this.colors[1],
-        timed: true,
-        id: res.id,
-      });
+      if(res.normal){
+        eventos.push({
+          name: res.justification,
+          start: inicio,
+          end: fim,
+          color: res.normal ? this.colors[0] : this.colors[1],
+          timed: true,
+          id: res.id,
+        });
+      }
     });
     this.events = eventos;
   },
