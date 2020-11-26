@@ -67,7 +67,7 @@
                 dark
                 rounded
                 small
-                @click="selectedOpen = false"
+                @click="sendToDetail('detail-reserve',selectedEvent.id)"
                 color="blue"
               >
                 <v-icon left> mdi-plus </v-icon>
@@ -75,7 +75,7 @@
               </v-btn>
               <v-btn
                 dark
-                @click="selectedOpen = false"
+                @click="cancel(selectedEvent.id)"
                 rounded
                 small
                 color="error"
@@ -93,6 +93,7 @@
 
 <script>
 import axiosConf from "../services/config";
+import { RRule } from 'rrule'
 
 export default {
   props: ["space_id"],
@@ -112,27 +113,19 @@ export default {
     events: [],
     colors: ["orange", "blue"],
     schedular: [
-      { start: "07:00:00", end:"07:50:00"},
-      { start: "07:50:00", end:"08:40:00"},
-      { start: "08:55:00", end:"09:45:00"},
-      { start: "09:45:00", end:"10:35:00"},
-      { start: "10:50:00", end:"11:40:00"},
-      { start: "11:40:00", end:"12:30:00"},
-      { start: "13:00:00", end:"13:50:00"},
-      { start: "13:50:00", end:"15:40:00"},
-      { start: "14:55:00", end:"15:45:00"},
-      { start: "16:50:00", end:"17:40:00" },
-      { start: "17:40:00", end:"18:30:00" },
+      { start: "07:00:00", end:"07:50:00", hour: "7", min: "50"},
+      { start: "07:50:00", end:"08:40:00", hour: "8", min: "40"},
+      { start: "08:55:00", end:"09:45:00", hour: "9", min: "45"},
+      { start: "09:45:00", end:"10:35:00", hour: "10", min: "35"},
+      { start: "10:50:00", end:"11:40:00", hour: "11", min: "40"},
+      { start: "11:40:00", end:"12:30:00", hour: "12", min: "30"},
+      { start: "13:00:00", end:"13:50:00", hour: "13", min: "50"},
+      { start: "13:50:00", end:"15:40:00", hour: "15", min: "40"},
+      { start: "14:55:00", end:"15:45:00", hour: "15", min: "45"},
+      { start: "16:50:00", end:"17:40:00", hour: "17", min: "40"},
+      { start: "17:40:00", end:"18:30:00", hour: "18", min: "30"},
     ],
-    dayWeek: [
-      { label: "Domingo", value: "6" },
-      { label: "Segunda", value: "0" },
-      { label: "Terça", value: "1" },
-      { label: "Quarta", value: "2" },
-      { label: "Quinta", value: "3" },
-      { label: "Sexta", value: "4" },
-      { label: "Sabádo", value: "5" },
-    ],
+    dayWeek: [RRule.MO, RRule.TU, RRule.WE, RRule.TH, RRule.FR, RRule.SA, RRule.SU],
   }),
   async created() {
     const result = await axiosConf.get("space-reservations", {
@@ -144,19 +137,24 @@ export default {
       let schedularStart = '', schedularEnd = '';
       const schedular = res.schedule.split(";");
       const hours = schedular[1].split(",");
-
+      let min=0;
+      let hour=0;
       let tam = hours.length;
       if(tam > 1) {
         schedularStart = this.schedular[(hours[0])-1].start;
         schedularEnd = this.schedular[(hours[tam-1])-1].end;
+        min = this.schedular[(hours[tam-1])-1].min;
+        hour = this.schedular[(hours[tam-1])-1].hour;
       }else{
         schedularStart = this.schedular[hours[0]].start;
         schedularEnd = this.schedular[hours[0]].end;
+        min = this.schedular[hours[0]].min;
+        hour = this.schedular[hours[0]].hour;
       }
 
       const inicio = new Date(`${res.dateStart}T${schedularStart}`);
       const fim = new Date(`${res.dateEnd}T${schedularEnd}`);
-
+      console.log(res.id);
       if(res.normal){
         eventos.push({
           name: res.justification,
@@ -166,14 +164,66 @@ export default {
           timed: true,
           id: res.id,
         });
+      }else{
+        let day = schedular[0].split(",");
+        let wd = [];
+        for(let i=0; i<day.length; i++){
+          wd.push(this.dayWeek[day[i]]);
+        }
+
+        let reservations = [];
+        let rule =	
+          new RRule({
+            freq: RRule.WEEKLY,
+            dtstart: inicio,
+            until: fim,
+            interval: 1,
+            byweekday: wd
+        });
+        reservations = rule.all();
+
+        reservations.forEach((r) => {
+          let hourEnd = new Date(r);
+          hourEnd.setMinutes(min);
+          hourEnd.setHours(hour);
+
+          eventos.push({
+            name: res.justification,
+            start: r,
+            end: hourEnd,
+            color: res.normal ? this.colors[0] : this.colors[1],
+            timed: true,
+            id: res.id,
+          })
+        });
       }
     });
+    console.log(eventos);
     this.events = eventos;
   },
   mounted() {
     this.$refs.calendar.checkChange();
   },
   methods: {
+    async cancel(id){
+      var r = confirm("Cancelar reserva?");
+      if (r == true) {
+        await axiosConf.put(`/reservation-cancel/${id}`);
+        this.$router.push('/');
+      } else {
+        console.log("continua aqui");
+      }
+    },
+    sendToDetail(where, id) {
+      let data = {};
+      this.spacesReserves.forEach((item) => {
+        if(item.id == id) {
+          data = item;
+        }
+      });
+      console.log(data);
+      this.$router.push({ name: where, params: { reserve: data } });
+    },
     viewDay({ date }) {
       this.focus = date;
       this.type = "day";

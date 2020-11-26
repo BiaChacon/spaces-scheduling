@@ -130,13 +130,13 @@ export default {
       {'label' : "17:40-18:30", 'value' : "11"},
     ],
     dayWeek: [
-      {'label' : "Domingo", 'value' : "6"},
       {'label' : "Segunda", 'value' : "0"},
       {'label' : "Terça", 'value' : "1"},
       {'label' : "Quarta", 'value' : "2"},
       {'label' : "Quinta", 'value' : "3"},
       {'label' : "Sexta", 'value' : "4"},
       {'label' : "Sabádo", 'value' : "5"},
+      {'label' : "Domingo", 'value' : "6"},
     ],
   }),
   async created() {
@@ -146,12 +146,6 @@ export default {
     this.spacesReserves = result.data;
   },
   methods: {
-    async detailReserve(id) {
-      this.$router.push("detail-reserve", id);
-    },
-    navegateTo(where) {
-      this.$router.push({ name: where });
-    },
     sendToDetail(where, data) {
       this.$router.push({ name: where, params: { reserve: data } });
     },
@@ -166,7 +160,7 @@ export default {
       let dayFormated = "";
 
       for(let i=0; i<d.length; i++) {
-        dayFormated += (`${this.dayWeek[i].label}`);
+        dayFormated += (`${this.dayWeek[d[i]].label}`);
         if(i+1 < d.length)
         dayFormated += (' | ');
       }
