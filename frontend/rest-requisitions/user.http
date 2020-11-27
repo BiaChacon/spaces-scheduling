@@ -1,18 +1,9 @@
-### Post requisition for reservation
+### Post requisition for login users
 
-POST http://localhost:3333/register-reservation HTTP/1.1
+POST http://localhost:3333/login HTTP/1.1
 content-type: application/json
 
 {
-    "username": "username",
-    "dateStart": "2020-11-01",
-    "dateEnd": "2020-11-01",
-    "justification": "lalalala",
-    "schedule": "7;1,2,3",
-    "canceled": "false",
-    "spaceId": "71b89e93"
+    "username": "luiz",
+    "password": "12345"
 }
-
-### Getting all reservations
-GET http://localhost:3333/reservations HTTP/1.1
-content-type: application/json
