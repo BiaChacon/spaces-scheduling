@@ -11,9 +11,9 @@ const UserController = require('./controllers/UserController');
 const routes = express.Router();
 
 routes.post('/login', UserController.login);
+routes.post('/signup', UserController.create);
 routes.get('/logout', verifyJWT, UserController.logout);
 routes.get('/profile', verifyJWT, UserController.profile);
-routes.post('/signup', UserController.create)
 
 routes.get('/spaces', SpaceController.index);
 routes.get('/spaces/:id', SpaceController.show);

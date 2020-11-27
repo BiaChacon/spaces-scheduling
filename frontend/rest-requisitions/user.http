@@ -4,6 +4,16 @@ POST http://localhost:3333/login HTTP/1.1
 content-type: application/json
 
 {
+    "username": "name",
+    "password": "3291"
+}
+
+### Post requisitions for signup users
+POST http://localhost:3333/signup HTTP/1.1
+content-type: application/json
+
+{
+    "admin": 0,
     "username": "luiz",
-    "password": "12345"
+    "password": "12345",
 }
