@@ -7,13 +7,8 @@ function generateAccessToken(user) {
 }
 module.exports = {
   async login(request, response) {
-    //esse teste abaixo deve ser feito no seu banco de dados
     const username = request.body.username;
     const pwd = request.body.password;
-    // if (request.body.username === 'luiz' && request.body.password === '12345') {
-    //auth ok
-    // const id = 1; //esse id viria do banco de dados
-
     const users = await connection('users').select('*');
     const user = users.find(u => u.username === username && u.password === pwd);
 
@@ -21,13 +16,9 @@ module.exports = {
     return response.json({ auth: true, token: generateAccessToken(user.id) });
   },
 
-  async logout(request, response) {
-    request.user.deleteToken(req.token, (err, user) => {
-      if (err)
-        return res.status(400).send(err);
-
-      return response.sendStatus(200);
-    });
+   logout(request, response) {
+    
+    response.json({ auth: false, token: null });
   },
 
   async profile(request, response) {
@@ -61,8 +52,10 @@ module.exports = {
     });
 
     // return response.json({ auth: true, token: generateAccessToken(id) });
-    const token = generateAccessToken({ user: id });
-    response.json(token);
+    // const token = generateAccessToken({ user: id });
+    // response.json(token);
+    return response.json({ auth: true, token: generateAccessToken(user.id) });
+
   },
 
 };
