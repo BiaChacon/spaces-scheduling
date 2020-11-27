@@ -2,7 +2,7 @@ const express = require('express');
 const { celebrate, Segments, Joi } = require('celebrate');
 require("dotenv-safe").config();
 // const jwt = require('jsonwebtoken');
-const verifyJWT = require('../utils/auth');
+const verifyJWT = require('./utils/auth');
 
 const SpaceController = require('./controllers/SpaceController');
 const ReservationController = require('./controllers/ReservationController');
@@ -13,7 +13,7 @@ const routes = express.Router();
 routes.post('/login', UserController.login);
 routes.get('/logout', verifyJWT, UserController.logout);
 routes.get('/profile', verifyJWT, UserController.profile);
-routes.post('/register-user', UserController.create)
+routes.post('/signup', UserController.create)
 
 routes.get('/spaces', SpaceController.index);
 routes.get('/spaces/:id', SpaceController.show);

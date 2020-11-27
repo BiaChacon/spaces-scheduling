@@ -3,7 +3,7 @@ const connection = require('../database/connection');
 const jwt = require('jsonwebtoken');
 
 module.exports = {
-  async login(request, response){
+  login(request, response){
     //esse teste abaixo deve ser feito no seu banco de dados
     if(request.body.username === 'luiz' && request.body.password === '12345'){
       //auth ok
