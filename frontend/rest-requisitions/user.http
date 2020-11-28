@@ -1,8 +1,6 @@
 ### Post requisition for login users
-
 POST http://localhost:3333/login HTTP/1.1
 content-type: application/json
-
 {
     "username": "name",
     "password": "3291"
@@ -11,11 +9,10 @@ content-type: application/json
 ### Post requisitions for signup users
 POST http://localhost:3333/register-user HTTP/1.1
 content-type: application/json
-
 {
     "admin": "true",
     "username": "bruno",
-    "password": "aaaa",
+    "password": "aaaa"
 }
 
 ### Post for logout user

@@ -36,21 +36,21 @@ module.exports = {
   },
 
   async create(request, response) {
-    const {
-      admin,
-      username,
-      password
-    } = request.body;
+    // const {
+    //   admin,
+    //   username,
+    //   password
+    // } = request.body;
 
-    const id = generateUniqueId();
-    await connection('users').insert({
-      id,
-      admin,
-      username,
-      password
-    });
+    // const id = generateUniqueId();
+    // await connection('users').insert({
+    //   id,
+    //   admin,
+    //   username,
+    //   password
+    // });
 
-    return response.json({ id });
+    return response.json( {msg : "msg"});
   },
 
 };
