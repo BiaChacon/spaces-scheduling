@@ -39,7 +39,7 @@ routes.get('/space-reservations', verifyJWT, ReservationController.reservationsB
 
 routes.put('/reservation-cancel/:id', verifyJWT, ReservationController.reservationCancel);
 
-routes.post('/register-reservation', celebrate({
+routes.post('/register-reservation', verifyJWT, celebrate({
     [Segments.BODY]: Joi.object().keys({
         normal: Joi.boolean().required(),
         dateStart: Joi.string().required(),
