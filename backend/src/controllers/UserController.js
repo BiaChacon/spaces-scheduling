@@ -16,8 +16,8 @@ module.exports = {
     return response.json({ auth: true, token: generateAccessToken(user.id) });
   },
 
-   logout(request, response) {
-    
+  logout(request, response) {
+
     response.json({ auth: false, token: null });
   },
 
@@ -39,8 +39,7 @@ module.exports = {
     const {
       admin,
       username,
-      password,
-      password2,
+      password
     } = request.body;
 
     const id = generateUniqueId();
@@ -51,11 +50,7 @@ module.exports = {
       password
     });
 
-    // return response.json({ auth: true, token: generateAccessToken(id) });
-    // const token = generateAccessToken({ user: id });
-    // response.json(token);
-    return response.json({ auth: true, token: generateAccessToken(user.id) });
-
+    return response.json({ id });
   },
 
 };

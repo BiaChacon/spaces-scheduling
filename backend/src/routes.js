@@ -1,7 +1,6 @@
 const express = require('express');
 const { celebrate, Segments, Joi } = require('celebrate');
 require("dotenv-safe").config();
-// const jwt = require('jsonwebtoken');
 const verifyJWT = require('./utils/auth');
 
 const SpaceController = require('./controllers/SpaceController');
@@ -11,11 +10,11 @@ const UserController = require('./controllers/UserController');
 const routes = express.Router();
 
 routes.post('/login', UserController.login);
-routes.post('/signup', UserController.create);
+routes.post('/register-user', UserController.create);
 routes.post('/logout', UserController.logout);
 routes.get('/profile', verifyJWT, UserController.profile);
 
-routes.get('/spaces', SpaceController.index);
+routes.get('/spaces', verifyJWT,SpaceController.index);
 routes.get('/spaces/:id', SpaceController.show);
 routes.get('/check-availability', SpaceController.availability);
 
