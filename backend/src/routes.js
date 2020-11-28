@@ -10,15 +10,15 @@ const UserController = require('./controllers/UserController');
 const routes = express.Router();
 
 routes.post('/login', UserController.login);
-routes.post('/register-user', UserController.create);
-routes.post('/logout', UserController.logout);
+routes.post('/register-user', verifyJWT, UserController.create);
+routes.post('/logout', verifyJWT, UserController.logout);
 routes.get('/profile', verifyJWT, UserController.profile);
 
-routes.get('/spaces', verifyJWT,SpaceController.index);
-routes.get('/spaces/:id', SpaceController.show);
-routes.get('/check-availability', SpaceController.availability);
+routes.get('/spaces', verifyJWT, SpaceController.index);
+routes.get('/spaces/:id', verifyJWT, SpaceController.show);
+routes.get('/check-availability', verifyJWT, SpaceController.availability);
 
-routes.post('/spaces', celebrate({
+routes.post('/spaces', verifyJWT, celebrate({
     [Segments.BODY]: Joi.object().keys({
         name: Joi.string().required(),
         description: Joi.string().required(),
@@ -33,11 +33,11 @@ routes.post('/spaces', celebrate({
     })
 }), SpaceController.create);
 
-routes.get('/reservations', ReservationController.index);
-routes.get('/reservations/:id', ReservationController.show);
-routes.get('/space-reservations', ReservationController.reservationsBySpace);
+routes.get('/reservations', verifyJWT, ReservationController.index);
+routes.get('/reservations/:id', verifyJWT, ReservationController.show);
+routes.get('/space-reservations', verifyJWT, ReservationController.reservationsBySpace);
 
-routes.put('/reservation-cancel/:id', ReservationController.reservationCancel);
+routes.put('/reservation-cancel/:id', verifyJWT, ReservationController.reservationCancel);
 
 routes.post('/register-reservation', celebrate({
     [Segments.BODY]: Joi.object().keys({
