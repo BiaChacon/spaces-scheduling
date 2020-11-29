@@ -9,10 +9,16 @@ import ReservationList from '../views/ReservationList.vue';
 import ReservationNormal from '../views/RegisterReservationNormal.vue';
 import ReservationRecurring from '../views/RegisterReservationRecurring.vue';
 import DetailReserve from '../views/DetailReserve.vue';
+import Login from '../views/Login.vue';
 
 Vue.use(VueRouter);
 
 const routes = [
+  {
+    path: '/login',
+    name: 'login',
+    component: Login
+  },
   {
     path: '/',
     name: 'home',
