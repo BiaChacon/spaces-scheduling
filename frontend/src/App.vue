@@ -44,7 +44,7 @@ export default {
   },
   computed: {
     showLogin () {
-      return this.$route.name !== 'home' && this.$route.name !== 'login'
+      return this.$route.name !== 'login'
     }
   }
 };
