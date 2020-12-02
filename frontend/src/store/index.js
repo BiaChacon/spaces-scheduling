@@ -39,12 +39,12 @@ export default new Vuex.Store({
       commit('auth_request')
       try {
         let result = await apiConfig.post(`/${endpoint}/`, data)
-        window.console.log(result);
         const token = result.data.token
-        // const 
-        localStorage.setItem('token', token)
+        localStorage.setItem('token', token);
         axios.defaults.headers.common['x-access-token'] = token
         commit('auth_success', token)
+        window.console.log(result);
+
       } catch (error) {
         window.console.log(error)
       }

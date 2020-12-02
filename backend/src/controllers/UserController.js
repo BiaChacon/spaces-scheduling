@@ -3,7 +3,7 @@ const connection = require('../database/connection');
 const jwt = require('jsonwebtoken');
 function generateAccessToken(user) {
   // expires after half and hour (1800 seconds = 30 minutes)
-  return jwt.sign({ user }, process.env.SECRET, { expiresIn: 300 });
+  return jwt.sign({ user }, process.env.SECRET, { expiresIn: 180 });
 }
 module.exports = {
   async login(request, response) {
@@ -12,7 +12,7 @@ module.exports = {
     const users = await connection('users').select('*');
     const user = users.find(u => u.username === username && u.password === pwd);
 
-    if (!user) { return response.status(500).json({ message: 'Login inválido!' }); }
+    if (!user) { return response.status(500).json({ auth: false, message: 'Login inválido!' }); }
     return response.json({ auth: true, token: generateAccessToken(user.id) });
   },
 

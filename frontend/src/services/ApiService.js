@@ -1,10 +1,11 @@
 import apiConfig from './config'
+let headers = localStorage.getItem('token');
 export default class ApiService{
     constructor(endpoint){
         this.endpoint = endpoint;
     }
     getList(){
-        return apiConfig.get(`/${this.endpoint}/`); 
+        return apiConfig.get(`/${this.endpoint}/`,headers); 
     }
 
     getOne(pk){

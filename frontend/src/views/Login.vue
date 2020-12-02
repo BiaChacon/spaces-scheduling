@@ -55,11 +55,10 @@ export default {
   }),
   methods: {
     login: function () {
-      // let data = this.form;
       this.$store
         .dispatch("login", this.form)
         .then(() => this.$router.push("/"))
-        .catch((err) => console.log(err));
+        .catch((err) => console.log(err), this.valid=false);
     },
   },
 };

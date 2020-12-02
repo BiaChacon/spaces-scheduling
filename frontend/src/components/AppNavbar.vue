@@ -9,7 +9,7 @@
         $store.getters.titlePage
       }}</v-toolbar-title>
       <div class="flex-grow-1"></div>
-      <v-btn icon>
+      <v-btn @click="logout" icon>
         <v-icon>mdi-exit-to-app</v-icon>
       </v-btn>
     </v-app-bar>
@@ -122,6 +122,12 @@ export default {
   methods: {
     navegateTo(where) {
       this.$router.push({ name: where });
+    },
+    logout() {
+      this.$store
+        .dispatch("logout")
+        .then(() => this.$router.push("/login"))
+        .catch((err) => console.log(err));
     },
   },
 };
