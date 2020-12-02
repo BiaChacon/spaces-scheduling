@@ -10,11 +10,14 @@ export function isSignedIn() {
       const { exp: expiration } = decode(token);
       const isExpired = !!expiration && Date.now() > expiration * 1000;
       if (isExpired)
-        return false; 
+        return false;
 
       return true;
-    } catch (_) { 
+    } catch (_) {
       return false;
     }
   }
+}
+export function getToken() {
+  return localStorage.getItem('token');
 }

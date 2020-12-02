@@ -33,9 +33,9 @@ routes.post('/spaces', verifyJWT, celebrate({
     })
 }), SpaceController.create);
 
-routes.get('/reservations', verifyJWT, ReservationController.index);
-routes.get('/reservations/:id', verifyJWT, ReservationController.show);
-routes.get('/space-reservations', verifyJWT, ReservationController.reservationsBySpace);
+routes.get('/reservations', ReservationController.index);
+routes.get('/reservations/:id', ReservationController.show);
+routes.get('/space-reservations', ReservationController.reservationsBySpace);
 
 routes.put('/reservation-cancel/:id', verifyJWT, ReservationController.reservationCancel);
 
