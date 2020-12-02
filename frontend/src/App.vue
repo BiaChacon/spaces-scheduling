@@ -1,6 +1,6 @@
 <template>
   <div v-if="!showLogin">
-    <v-app style="background-color: #D9E2EB;">
+    <v-app style="background-color: #d9e2eb">
       <v-main>
         <v-container fluid>
           <router-view></router-view>
@@ -20,18 +20,25 @@
       <!-- <Footer></Footer> -->
     </v-app>
   </div>
-
 </template>
 
 <script>
 import AppNavbar from "./components/AppNavbar";
-// import Footer from './components/Footer';
 
 export default {
   name: "App",
   components: {
-    // Footer,
     AppNavbar,
+  },
+  created: function () {
+    this.$http.interceptors.response.use(undefined, function (err) {
+      return new Promise(function () {
+        if (err.status === 401 && err.config && !err.config.__isRetryRequest) {
+          this.$store.dispatch('logout')
+        }
+        throw err;
+      });
+    });
   },
   data: () => ({
     drawer: false,
@@ -43,10 +50,20 @@ export default {
     },
   },
   computed: {
-    showLogin () {
-      return this.$route.name !== 'login'
-    }
-  }
+    showLogin() {
+      return this.$route.name !== "login";
+    },
+    isLoggedIn: function () {
+      return this.$store.getters.isLoggedIn;
+    },
+  },
+  methods: {
+    logout: function () {
+      this.$store.dispatch("logout").then(() => {
+        this.$router.push("/login");
+      });
+    },
+  },
 };
 </script>
 

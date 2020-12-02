@@ -1,46 +1,31 @@
 <template>
-  <v-row 
-    justify="center" 
-    class="text-center" 
-    style="margin-top: 200px"
-  >
-    <v-col
-      cols="12"
-      sm="10"
-      md="8"
-      lg="5"
-    >
+  <v-row justify="center" class="text-center" style="margin-top: 200px">
+    <v-col cols="12" sm="10" md="8" lg="5">
       <v-card ref="form" elevation="2" outlined>
-        <v-card-title 
-          style="color: #0091EA; font-weight: bold; font-size: 20px"
-        > 
+        <v-card-title
+          style="color: #0091ea; font-weight: bold; font-size: 20px"
+        >
           AUTENTICAÇÃO INTEGRADA
         </v-card-title>
 
         <div v-if="!valid">
-          <v-alert
-            color="red"
-            dense
-            outlined
-          >
-            Credenciais inválidas.
-          </v-alert>
+          <v-alert color="red" dense outlined> Credenciais inválidas. </v-alert>
         </div>
 
         <v-card-text>
-            <v-text-field
-              v-model="form.username"
-              label="Usuário"
-              outlined
-            ></v-text-field>
-            <v-text-field 
-              v-model="form.password" 
-              label="Senha"
-              outlined
-              :append-icon="show1 ? 'mdi-eye' : 'mdi-eye-off'"
-              :type="show1 ? 'text' : 'password'"
-              @click:append="show1 = !show1"
-            ></v-text-field>
+          <v-text-field
+            v-model="username"
+            label="Usuário"
+            outlined
+          ></v-text-field>
+          <v-text-field
+            v-model="password"
+            label="Senha"
+            outlined
+            :append-icon="show1 ? 'mdi-eye' : 'mdi-eye-off'"
+            :type="show1 ? 'text' : 'password'"
+            @click:append="show1 = !show1"
+          ></v-text-field>
         </v-card-text>
 
         <v-card-actions>
@@ -62,20 +47,21 @@
 </template>
 
 <script>
-
 export default {
   data: () => ({
     show1: false,
     valid: true,
-    form: {
-      username: '',
-      password: '',
-    }
+    username: "",
+    password: "",
   }),
   methods: {
-    login() {
-      // this.$router.push('home');
-      this.valid=false;
+    login: function () {
+      let user = this.username;
+      let password = this.password;
+      this.$store
+        .dispatch("login", { user, password })
+        .then(() => this.$router.push("/"))
+        .catch((err) => console.log(err));
     },
   },
 };
