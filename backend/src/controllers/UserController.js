@@ -13,7 +13,7 @@ module.exports = {
     const user = users.find(u => u.username === username && u.password === pwd);
 
     if (!user) { return response.status(500).json({ auth: false, message: 'Login inválido!' }); }
-    return response.json({ auth: true, token: generateAccessToken(user.id) });
+    return response.json({ auth: true, token: generateAccessToken(user.id), user: {id: user.id, username: user.username} });
   },
 
   logout(request, response) {
@@ -22,10 +22,12 @@ module.exports = {
   },
 
   async profile(request, response) {
+    const { id } = request.params;
+    const user = await connection('users').select('*').where('id', id);
+
     return response.json({
-      isAuth: true,
-      id: request.user.id,
-      username: request.user.username,
+      id: user.id,
+      username: user.username,
     });
   },
 

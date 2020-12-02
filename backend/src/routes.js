@@ -12,7 +12,7 @@ const routes = express.Router();
 routes.post('/login', UserController.login);
 routes.post('/register-user', verifyJWT, UserController.create);
 routes.post('/logout', verifyJWT, UserController.logout);
-routes.get('/profile', verifyJWT, UserController.profile);
+routes.get('/profile/:id', verifyJWT, UserController.profile);
 
 routes.get('/spaces', verifyJWT, SpaceController.index);
 routes.get('/spaces/:id', verifyJWT, SpaceController.show);

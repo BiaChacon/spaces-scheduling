@@ -28,5 +28,4 @@ export default class ApiService {
     async delete(pk) {
         return await apiConfig.delete(`/${this.endpoint}/${pk}/`, headers());
     }
-
 }
