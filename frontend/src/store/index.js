@@ -19,10 +19,10 @@ export default new Vuex.Store({
     auth_request(state) {
       state.status = 'loading'
     },
-    auth_success(state, token, user) {
+    auth_success(state, token) {
       state.status = 'success'
       state.token = token
-      state.user = user
+      // state.user = user
     },
     auth_error(state) {
       state.status = 'error'
@@ -33,25 +33,36 @@ export default new Vuex.Store({
     },
   },
   actions: {
-    login({ commit }, data) {
+    async login({ commit }, data) {
       // return new Promise((resolve, reject) => {
-        let endpoint = 'login'
-        commit('auth_request')
-        apiConfig.post(`/${endpoint}/`,data)
-        // axios({ url: 'http://localhost:3333/login', data, method: 'POST' })
-        //   .then(resp => {
-        //     const token = resp.data.token
-        //     const user = resp.data.user
-        //     localStorage.setItem('token', token)
-        //     axios.defaults.headers.common['Authorization'] = token
-        //     commit('auth_success', token, user)
-        //     resolve(resp)
-        //   })
-        //   .catch(err => {
-        //     commit('auth_error')
-        //     localStorage.removeItem('token')
-        //     reject(err)
-        //   })
+      let endpoint = 'login'
+      commit('auth_request')
+      try {
+        let result = await apiConfig.post(`/${endpoint}/`, data)
+        window.console.log(result);
+        const token = result.data.token
+        // const 
+        localStorage.setItem('token', token)
+        axios.defaults.headers.common['x-access-token'] = token
+        commit('auth_success', token)
+      } catch (error) {
+        window.console.log(error)
+      }
+
+      // axios({ url: 'http://localhost:3333/login', data, method: 'POST' })
+      //   .then(resp => {
+      //     const token = resp.data.token
+      //     const user = resp.data.user
+      //     localStorage.setItem('token', token)
+      //     axios.defaults.headers.common['Authorization'] = token
+      //     commit('auth_success', token, user)
+      //     resolve(resp)
+      //   })
+      //   .catch(err => {
+      //     commit('auth_error')
+      //     localStorage.removeItem('token')
+      //     reject(err)
+      //   })
       // })
     },
     logout({ commit }) {

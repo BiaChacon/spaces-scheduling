@@ -16,7 +16,7 @@ import vuetify from './plugins/vuetify';
 Vue.config.productionTip = false
 const token = localStorage.getItem('token')
 if (token) {
-  Vue.prototype.$http.defaults.headers.common['Authorization'] = token
+  Vue.prototype.$http.defaults.headers.common['x-access-token'] = token
 }
 import { VueMaskDirective } from 'v-mask'
 Vue.directive('mask', VueMaskDirective);
