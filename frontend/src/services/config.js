@@ -3,6 +3,7 @@ import store from '../store/index'
 
 let tokinho = localStorage.getItem('token');
 console.log(tokinho);
+
 let tokinho2 =  store.state.token;
 console.log(tokinho2)
 

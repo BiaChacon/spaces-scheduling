@@ -31,14 +31,14 @@ export default {
     AppNavbar,
   },
   created: function () {
-    this.$http.interceptors.response.use(undefined, function (err) {
-      return new Promise(function () {
-        if (err.status === 401 && err.config && !err.config.__isRetryRequest) {
-          this.$store.dispatch('logout')
-        }
-        throw err;
-      });
-    });
+    // this.$http.interceptors.response.use(undefined, function (err) {
+    //   return new Promise(function () {
+    //     if (err.status === 401 && err.config && !err.config.__isRetryRequest) {
+    //       this.$store.dispatch("logout");
+    //     }
+    //     throw err;
+    //   });
+    // });
   },
   data: () => ({
     drawer: false,
@@ -54,6 +54,7 @@ export default {
       return this.$route.name !== "login";
     },
     isLoggedIn: function () {
+      
       return this.$store.getters.isLoggedIn;
     },
   },
