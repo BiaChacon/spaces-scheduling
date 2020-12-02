@@ -6,6 +6,8 @@ import 'font-awesome/css/font-awesome.min.css'
 import { BootstrapVue, IconsPlugin } from 'bootstrap-vue'
 import Axios from 'axios';
 Vue.prototype.$http = Axios;
+// Vue.prototype.$data = $store
+
 // Install BootstrapVue
 Vue.use(BootstrapVue)
 // Optionally install the BootstrapVue icon components plugin
