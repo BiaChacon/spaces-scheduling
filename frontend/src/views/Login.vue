@@ -14,12 +14,12 @@
 
         <v-card-text>
           <v-text-field
-            v-model="username"
+            v-model="form.username"
             label="Usuário"
             outlined
           ></v-text-field>
           <v-text-field
-            v-model="password"
+            v-model="form.password"
             label="Senha"
             outlined
             :append-icon="show1 ? 'mdi-eye' : 'mdi-eye-off'"
@@ -51,15 +51,13 @@ export default {
   data: () => ({
     show1: false,
     valid: true,
-    username: "",
-    password: "",
+    form: { username: "", password: "" },
   }),
   methods: {
     login: function () {
-      let user = this.username;
-      let password = this.password;
+      // let data = this.form;
       this.$store
-        .dispatch("login", { user, password })
+        .dispatch("login", this.form)
         .then(() => this.$router.push("/"))
         .catch((err) => console.log(err));
     },

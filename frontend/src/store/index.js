@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 import axios from 'axios'
+import apiConfig from '../services/config'
 
 Vue.use(Vuex)
 
@@ -32,25 +33,26 @@ export default new Vuex.Store({
     },
   },
   actions: {
-    login({ commit }, username, password) {
-      return new Promise((resolve, reject) => {
-        const data = {username, password}
+    login({ commit }, data) {
+      // return new Promise((resolve, reject) => {
+        let endpoint = 'login'
         commit('auth_request')
-        axios({ url: 'http://localhost:3333/login', data, method: 'POST' })
-          .then(resp => {
-            const token = resp.data.token
-            const user = resp.data.user
-            localStorage.setItem('token', token)
-            axios.defaults.headers.common['Authorization'] = token
-            commit('auth_success', token, user)
-            resolve(resp)
-          })
-          .catch(err => {
-            commit('auth_error')
-            localStorage.removeItem('token')
-            reject(err)
-          })
-      })
+        apiConfig.post(`/${endpoint}/`,data)
+        // axios({ url: 'http://localhost:3333/login', data, method: 'POST' })
+        //   .then(resp => {
+        //     const token = resp.data.token
+        //     const user = resp.data.user
+        //     localStorage.setItem('token', token)
+        //     axios.defaults.headers.common['Authorization'] = token
+        //     commit('auth_success', token, user)
+        //     resolve(resp)
+        //   })
+        //   .catch(err => {
+        //     commit('auth_error')
+        //     localStorage.removeItem('token')
+        //     reject(err)
+        //   })
+      // })
     },
     logout({ commit }) {
       return new Promise((resolve) => {
