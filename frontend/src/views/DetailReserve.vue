@@ -168,15 +168,28 @@ export default {
     nameSpace() {
       return this.space[0].name;
     },
-    async cancel(){
+    cancel(){
+      this.$confirm(
+        "Deseja cancelar reserva?",
+        "Cancelar Reserva",
+        "question",
+        {
+          confirmButtonText: "Sim",
+          confirmButtonColor: "#4CAF50",
+          cancelButtonText: "Não",
+          cancelButtonColor: "#FF5252",
+        }
+        ).then(result => {
+          if (result){
+            this.cancelar();
+            this.$alert("Reserva cancelada.", "Sucesso", 'success');
+          }
+        });
+    },
+    async cancelar(){
       const api2 = new ApiService('reservation-cancel');
-      var r = confirm("Cancelar reserva?");
-      if (r == true) {
-        await api2.cancel(this.reserve,this.reserve.id);
-        this.$router.push('/');
-      } else {
-        console.log("continua aqui");
-      }
+      await api2.cancel(this.reserve,this.reserve.id);
+      this.$router.push('/');
     },
     formatDate(date) {
       if (!date) return null;

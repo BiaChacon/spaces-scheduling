@@ -92,6 +92,7 @@
       </v-form>
       <v-card-actions class="justify-center">
         <v-btn
+          :disabled="!isValid"
           style="width: 250px"
           large
           rounded
@@ -138,39 +139,24 @@ export default {
   },
   methods: {
     async submit(evt) {
-      if (
-        this.form.name === "" &&
-        this.form.description === "" &&
-        this.form.localization === "" &&
-        this.form.responsible === "" &&
-        this.form.special === null &&
-        this.form.justification === "" &&
-        this.form.disabled === false &&
-        this.form.computers === null &&
-        this.form.qtdPeople === "" &&
-        this.form.extension === ""
-      ) {
-        alert("Todos os campos devems ser preenchidos");
-      } else {
         evt.preventDefault();
         http.create(this.form);
-        alert("Espaço salvo");
+        this.$alert("Espaço Cadastrado.", "Sucesso", 'success');
         this.$router.push("/");
-      }
     },
     onReset(evt) {
       evt.preventDefault();
       (this.form.name = ""),
-        (this.form.description = ""),
-        (this.form.localization = ""),
-        (this.form.responsible = ""),
-        (this.form.special = null),
-        (this.form.justification = ""),
-        (this.form.disabled = false),
-        (this.form.computers = null),
-        (this.form.qtdPeople = ""),
-        (this.form.extension = ""),
-        (this.show = false);
+      (this.form.description = ""),
+      (this.form.localization = ""),
+      (this.form.responsible = ""),
+      (this.form.special = null),
+      (this.form.justification = ""),
+      (this.form.disabled = false),
+      (this.form.computers = null),
+      (this.form.qtdPeople = ""),
+      (this.form.extension = ""),
+      (this.show = false);
       this.$nextTick(() => {
         this.show = true;
       });

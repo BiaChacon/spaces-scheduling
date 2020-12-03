@@ -225,7 +225,7 @@ export default {
       };
 
       await api.create(this.newReserve);
-      alert("Reserva cadastrada com sucesso!");
+      this.$alert("Reserva Cadastrada.", "Sucesso", 'success');
       this.clear();
       this.$router.push("/");
     },

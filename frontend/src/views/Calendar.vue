@@ -67,7 +67,7 @@
                 dark
                 rounded
                 small
-                @click="sendToDetail('detail-reserve',selectedEvent.id)"
+                @click="sendToDetail('detail-reserve', selectedEvent.id)"
                 color="blue"
               >
                 <v-icon left> mdi-plus </v-icon>
@@ -94,7 +94,7 @@
 <script>
 import ApiService from "../services/ApiService";
 const api = new ApiService("space-reservations");
-import { RRule } from 'rrule'
+import { RRule } from "rrule";
 
 export default {
   props: ["space_id"],
@@ -114,19 +114,27 @@ export default {
     events: [],
     colors: ["orange", "blue"],
     schedular: [
-      { start: "07:00:00", end:"07:50:00", hour: "7", min: "50"},
-      { start: "07:50:00", end:"08:40:00", hour: "8", min: "40"},
-      { start: "08:55:00", end:"09:45:00", hour: "9", min: "45"},
-      { start: "09:45:00", end:"10:35:00", hour: "10", min: "35"},
-      { start: "10:50:00", end:"11:40:00", hour: "11", min: "40"},
-      { start: "11:40:00", end:"12:30:00", hour: "12", min: "30"},
-      { start: "13:00:00", end:"13:50:00", hour: "13", min: "50"},
-      { start: "13:50:00", end:"15:40:00", hour: "15", min: "40"},
-      { start: "14:55:00", end:"15:45:00", hour: "15", min: "45"},
-      { start: "16:50:00", end:"17:40:00", hour: "17", min: "40"},
-      { start: "17:40:00", end:"18:30:00", hour: "18", min: "30"},
+      { start: "07:00:00", end: "07:50:00", hour: "7", min: "50" },
+      { start: "07:50:00", end: "08:40:00", hour: "8", min: "40" },
+      { start: "08:55:00", end: "09:45:00", hour: "9", min: "45" },
+      { start: "09:45:00", end: "10:35:00", hour: "10", min: "35" },
+      { start: "10:50:00", end: "11:40:00", hour: "11", min: "40" },
+      { start: "11:40:00", end: "12:30:00", hour: "12", min: "30" },
+      { start: "13:00:00", end: "13:50:00", hour: "13", min: "50" },
+      { start: "13:50:00", end: "15:40:00", hour: "15", min: "40" },
+      { start: "14:55:00", end: "15:45:00", hour: "15", min: "45" },
+      { start: "16:50:00", end: "17:40:00", hour: "17", min: "40" },
+      { start: "17:40:00", end: "18:30:00", hour: "18", min: "30" },
     ],
-    dayWeek: [RRule.MO, RRule.TU, RRule.WE, RRule.TH, RRule.FR, RRule.SA, RRule.SU],
+    dayWeek: [
+      RRule.MO,
+      RRule.TU,
+      RRule.WE,
+      RRule.TH,
+      RRule.FR,
+      RRule.SA,
+      RRule.SU,
+    ],
   }),
   async created() {
     const result = await api.getListWithParams({
@@ -135,18 +143,19 @@ export default {
     this.spacesReserves = result.data;
     let eventos = [];
     this.spacesReserves.forEach((res) => {
-      let schedularStart = '', schedularEnd = '';
+      let schedularStart = "",
+        schedularEnd = "";
       const schedular = res.schedule.split(";");
       const hours = schedular[1].split(",");
-      let min=0;
-      let hour=0;
+      let min = 0;
+      let hour = 0;
       let tam = hours.length;
-      if(tam > 1) {
-        schedularStart = this.schedular[(hours[0])-1].start;
-        schedularEnd = this.schedular[(hours[tam-1])-1].end;
-        min = this.schedular[(hours[tam-1])-1].min;
-        hour = this.schedular[(hours[tam-1])-1].hour;
-      }else{
+      if (tam > 1) {
+        schedularStart = this.schedular[hours[0] - 1].start;
+        schedularEnd = this.schedular[hours[tam - 1] - 1].end;
+        min = this.schedular[hours[tam - 1] - 1].min;
+        hour = this.schedular[hours[tam - 1] - 1].hour;
+      } else {
         schedularStart = this.schedular[hours[0]].start;
         schedularEnd = this.schedular[hours[0]].end;
         min = this.schedular[hours[0]].min;
@@ -156,7 +165,7 @@ export default {
       const inicio = new Date(`${res.dateStart}T${schedularStart}`);
       const fim = new Date(`${res.dateEnd}T${schedularEnd}`);
       console.log(res.id);
-      if(res.normal){
+      if (res.normal) {
         eventos.push({
           name: res.justification,
           start: inicio,
@@ -165,21 +174,20 @@ export default {
           timed: true,
           id: res.id,
         });
-      }else{
+      } else {
         let day = schedular[0].split(",");
         let wd = [];
-        for(let i=0; i<day.length; i++){
+        for (let i = 0; i < day.length; i++) {
           wd.push(this.dayWeek[day[i]]);
         }
 
         let reservations = [];
-        let rule =	
-          new RRule({
-            freq: RRule.WEEKLY,
-            dtstart: inicio,
-            until: fim,
-            interval: 1,
-            byweekday: wd
+        let rule = new RRule({
+          freq: RRule.WEEKLY,
+          dtstart: inicio,
+          until: fim,
+          interval: 1,
+          byweekday: wd,
         });
         reservations = rule.all();
 
@@ -195,7 +203,7 @@ export default {
             color: res.normal ? this.colors[0] : this.colors[1],
             timed: true,
             id: res.id,
-          })
+          });
         });
       }
     });
@@ -206,26 +214,39 @@ export default {
     this.$refs.calendar.checkChange();
   },
   methods: {
-    async cancel(id){
-      const api2 = new ApiService('reservation-cancel');
-      var r = confirm("Cancelar reserva?");
-      if (r == true) {
-        let reservation = {};
-        this.events.forEach((e) => {
-          if(e.id == id) {
-            reservation = e;
-          }
-        })
-        await api2.cancel(reservation,id);
-        this.$router.push('/');
-      } else {
-        console.log("continua aqui");
-      }
+    cancel(id) {
+      this.$confirm(
+        "Deseja cancelar reserva?",
+        "Cancelar Reserva",
+        "question",
+        {
+          confirmButtonText: "Sim",
+          confirmButtonColor: "#4CAF50",
+          cancelButtonText: "Não",
+          cancelButtonColor: "#FF5252",
+        }
+      ).then((result) => {
+        if (result) {
+          this.cancelar(id);
+          this.$alert("Reserva cancelada.", "Sucesso", "success");
+        }
+      });
+    },
+    async cancelar(id) {
+      const api2 = new ApiService("reservation-cancel");
+      let reservation = {};
+      this.events.forEach((e) => {
+        if (e.id == id) {
+          reservation = e;
+        }
+      });
+      await api2.cancel(reservation, id);
+      this.$router.push("/");
     },
     sendToDetail(where, id) {
       let data = {};
       this.spacesReserves.forEach((item) => {
-        if(item.id == id) {
+        if (item.id == id) {
           data = item;
         }
       });
