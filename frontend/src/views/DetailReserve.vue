@@ -113,7 +113,7 @@
           <v-btn
             rounded
             small
-            @click.prevent="cancel"
+            @click="cancel"
             color="error"
           >
             <v-icon left>
@@ -126,10 +126,10 @@
     </v-card>
   </div>
 </template>
+
 <script>
 import ApiService from '../services/ApiService';
-const http = new ApiService('spaces');
-import axiosConf from "../services/config";
+const api = new ApiService('spaces');
 
 export default {
   props: ["reserve"],
@@ -159,7 +159,7 @@ export default {
     ],
   }),
   async created() {
-    const result = await http.getOne(this.reserve.spaceId);
+    const result = await api.getOne(this.reserve.spaceId);
     this.space = result.data;
     this.$store.commit("setTitle", "Detalhes da Reserva");
     
@@ -169,9 +169,10 @@ export default {
       return this.space[0].name;
     },
     async cancel(){
+      const api2 = new ApiService('reservation-cancel');
       var r = confirm("Cancelar reserva?");
       if (r == true) {
-        await axiosConf.put(`/reservation-cancel/${this.reserve.id}`);
+        await api2.cancel(this.reserve,this.reserve.id);
         this.$router.push('/');
       } else {
         console.log("continua aqui");

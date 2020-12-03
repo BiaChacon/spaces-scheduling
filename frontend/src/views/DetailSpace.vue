@@ -102,6 +102,7 @@
     <SpaceReservations :space_id="space.id" />
   </div>
 </template>
+
 <script>
 import SpaceReservations from "../views/SpaceReservations.vue";
 import Calendar from "../views/Calendar.vue";
@@ -113,7 +114,6 @@ export default {
     Calendar,
   },
   async created() {
-    console.log(this.space);
     this.$store.commit("setTitle", "Espaço");
   },
 };

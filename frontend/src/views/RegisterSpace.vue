@@ -1,4 +1,3 @@
-
 <template>
   <v-card class="mx-auto" max-width="500">
     <v-card-text>
@@ -109,6 +108,7 @@
 <script>
 import ApiService from "../services/ApiService";
 const http = new ApiService("spaces");
+
 export default {
   data() {
     return {
@@ -160,7 +160,6 @@ export default {
     },
     onReset(evt) {
       evt.preventDefault();
-      // Reset our form values
       (this.form.name = ""),
         (this.form.description = ""),
         (this.form.localization = ""),
@@ -171,7 +170,6 @@ export default {
         (this.form.computers = null),
         (this.form.qtdPeople = ""),
         (this.form.extension = ""),
-        // Trick to reset/clear native browser form validation state
         (this.show = false);
       this.$nextTick(() => {
         this.show = true;
@@ -183,6 +181,7 @@ export default {
   },
 };
 </script>
+
 <style scoped>
 #formSpace {
   width: 400px;

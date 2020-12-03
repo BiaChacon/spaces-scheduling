@@ -70,7 +70,6 @@
 
 <script>
 import ApiService from "../services/ApiService";
-
 const http = new ApiService("spaces");
 
 export default {
@@ -78,8 +77,7 @@ export default {
     spaces: [],
   }),
   async created() {
-    
-    let response = await http.getList("spaces");
+    let response = await http.getList();
     this.spaces = response.data;
     this.$store.commit("setTitle", "Espaços");
   },
@@ -97,4 +95,5 @@ export default {
   },
 };
 </script>
+
 <style lang="stylus" scoped></style>

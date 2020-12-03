@@ -92,7 +92,8 @@
 </template>
 
 <script>
-import axiosConf from "../services/config";
+import ApiService from "../services/ApiService";
+const api = new ApiService("space-reservations");
 import { RRule } from 'rrule'
 
 export default {
@@ -128,7 +129,7 @@ export default {
     dayWeek: [RRule.MO, RRule.TU, RRule.WE, RRule.TH, RRule.FR, RRule.SA, RRule.SU],
   }),
   async created() {
-    const result = await axiosConf.get("space-reservations", {
+    const result = await api.getListWithParams({
       params: { spaceId: this.space_id },
     });
     this.spacesReserves = result.data;
@@ -206,9 +207,16 @@ export default {
   },
   methods: {
     async cancel(id){
+      const api2 = new ApiService('reservation-cancel');
       var r = confirm("Cancelar reserva?");
       if (r == true) {
-        await axiosConf.put(`/reservation-cancel/${id}`);
+        let reservation = {};
+        this.events.forEach((e) => {
+          if(e.id == id) {
+            reservation = e;
+          }
+        })
+        await api2.cancel(reservation,id);
         this.$router.push('/');
       } else {
         console.log("continua aqui");

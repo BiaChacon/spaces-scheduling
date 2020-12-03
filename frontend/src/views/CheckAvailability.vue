@@ -148,9 +148,8 @@
 </template>
 
 <script>
-// import ApiService from '../services/ApiService';
-// const http = new ApiService('spaces');
-import axios from "axios";
+import ApiService from "../services/ApiService";
+const api = new ApiService("check-availability");
 
 export default {
   data: () => ({
@@ -209,9 +208,7 @@ export default {
       this.date = "";
       this.checkComputers = "";
       this.checkSchedular = "";
-      // let response = await http.getList('spaces');
       this.spaces = [];
-      // this.spaces = response.data;
     },
     async check() {
       let hours = "";
@@ -220,18 +217,21 @@ export default {
         hours += `${state},`;
       });
       hours = hours.substring(0, hours.length - 1);
-      console.log(hours);
-      console.log(this.checkComputers);
-      console.log(this.date);
-      const response = await axios.get(
-        `http://localhost:3333/check-availability/?computers=${this.checkComputers}&date=${this.date}&hours=${hours}`
-      );
+
+      const response = await api.getListWithParams({
+        params: {
+          computers: this.checkComputers,
+          date: this.date,
+          hours: hours,
+        },
+      });
+
       this.spaces = [];
-      console.log(response.data);
       this.spaces = response.data;
-      console.log(this.spaces);
     },
   },
 };
 </script>
-<style lang="stylus" scoped></style>
+
+<style lang="stylus" scoped>
+</style>
