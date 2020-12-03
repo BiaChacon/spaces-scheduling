@@ -1,5 +1,5 @@
 <template>
-  <div v-if="!showLogin">
+  <div v-if="!showMenu">
     <v-app style="background-color: #d9e2eb">
       <v-main>
         <v-container fluid>
@@ -30,16 +30,6 @@ export default {
   components: {
     AppNavbar,
   },
-  created: function () {
-    // this.$http.interceptors.response.use(undefined, function (err) {
-    //   return new Promise(function () {
-    //     if (err.status === 401 && err.config && !err.config.__isRetryRequest) {
-    //       this.$store.dispatch("logout");
-    //     }
-    //     throw err;
-    //   });
-    // });
-  },
   data: () => ({
     drawer: false,
     group: null,
@@ -50,20 +40,9 @@ export default {
     },
   },
   computed: {
-    showLogin() {
+    showMenu() {
       return this.$route.name !== "login";
-    },
-    isLoggedIn: function () {
-      
-      return this.$store.getters.isLoggedIn;
-    },
-  },
-  methods: {
-    logout: function () {
-      this.$store.dispatch("logout").then(() => {
-        this.$router.push("/login");
-      });
-    },
+    }
   },
 };
 </script>
