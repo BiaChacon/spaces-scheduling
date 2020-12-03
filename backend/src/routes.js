@@ -33,6 +33,21 @@ routes.post('/spaces', verifyJWT, celebrate({
     })
 }), SpaceController.create);
 
+routes.put('/spaces/:id', verifyJWT, celebrate({
+    [Segments.BODY]: Joi.object().keys({
+        name: Joi.string().required(),
+        description: Joi.string().required(),
+        localization: Joi.string().required(),
+        responsible: Joi.string().required(),
+        special: Joi.boolean().required(),
+        justification: Joi.string().required(),
+        disabled: Joi.boolean().required(),
+        computers: Joi.boolean().required(),
+        qtdPeople: Joi.number().required(),
+        extension: Joi.number().required() //ramal
+    })
+}), SpaceController.edit);
+
 routes.get('/reservations', ReservationController.index);
 routes.get('/reservations/:id', ReservationController.show);
 routes.get('/space-reservations', ReservationController.reservationsBySpace);
