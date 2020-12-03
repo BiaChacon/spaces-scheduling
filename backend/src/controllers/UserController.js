@@ -2,8 +2,8 @@ const generateUniqueId = require('../utils/generateUniqueId');
 const connection = require('../database/connection');
 const jwt = require('jsonwebtoken');
 function generateAccessToken(user) {
-  // expires after half and hour (1800 seconds = 30 minutes)
-  return jwt.sign({ user }, process.env.SECRET, { expiresIn: 180 });
+  // expires after half and hour (600 seconds = 10 minutes)
+  return jwt.sign({ user }, process.env.SECRET, { expiresIn: 600 });
 }
 module.exports = {
   async login(request, response) {
