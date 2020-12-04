@@ -217,14 +217,14 @@ export default {
         hours += `${state},`;
       });
       hours = hours.substring(0, hours.length - 1);
-
-      const response = await api.getListWithParams({
-        params: {
-          computers: this.checkComputers,
-          date: this.date,
-          hours: hours,
-        },
-      });
+      
+      const params = new URLSearchParams({
+        computers: this.checkComputers,
+        date: this.date,
+        hours: hours,
+      }).toString();
+      
+      const response = await api.getListWithParams(params);
 
       this.spaces = [];
       this.spaces = response.data;
@@ -233,5 +233,4 @@ export default {
 };
 </script>
 
-<style lang="stylus" scoped>
-</style>
+<style lang="stylus" scoped></style>

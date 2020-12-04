@@ -147,9 +147,11 @@ export default {
     ],
   }),
   async created() {
-    const result = await http.getListWithParams({
-      params: { spaceId: this.space_id },
-    });
+    const params = new URLSearchParams({
+      spaceId: this.space_id
+    }).toString();
+
+    const result = await http.getListWithParams(params);
     this.spacesReserves = result.data;
   },
   methods: {

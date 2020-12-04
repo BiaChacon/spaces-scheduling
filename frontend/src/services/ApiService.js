@@ -26,7 +26,7 @@ export default class ApiService {
     }
 
     getListWithParams(params) {
-        return apiConfig.get(`/${this.endpoint}/`, params, headers());
+        return apiConfig.get(`/${this.endpoint}/?${params}`, headers());
     }
 
     async cancel(data,pk) {
