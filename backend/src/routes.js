@@ -16,7 +16,7 @@ routes.get('/profile/:id', verifyJWT, UserController.profile);
 
 routes.get('/spaces', verifyJWT, SpaceController.index);
 routes.get('/spaces/:id', verifyJWT, SpaceController.show);
-routes.get('/check-availability', verifyJWT, SpaceController.availability);
+routes.get('/check-availability', SpaceController.availability);
 
 routes.post('/spaces', verifyJWT, celebrate({
     [Segments.BODY]: Joi.object().keys({
@@ -48,9 +48,9 @@ routes.put('/spaces/:id', verifyJWT, celebrate({
     })
 }), SpaceController.edit);
 
-routes.get('/reservations', ReservationController.index);
-routes.get('/reservations/:id', ReservationController.show);
-routes.get('/space-reservations', ReservationController.reservationsBySpace);
+routes.get('/reservations', verifyJWT, ReservationController.index);
+routes.get('/reservations/:id', verifyJWT,ReservationController.show);
+routes.get('/space-reservations', verifyJWT,ReservationController.reservationsBySpace);
 
 routes.put('/reservation-cancel/:id', verifyJWT, ReservationController.reservationCancel);
 
