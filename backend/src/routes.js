@@ -16,7 +16,7 @@ routes.get('/profile/:id', verifyJWT, UserController.profile);
 
 routes.get('/spaces', verifyJWT, SpaceController.index);
 routes.get('/spaces/:id', verifyJWT, SpaceController.show);
-routes.get('/check-availability', SpaceController.availability);
+routes.get('/check-availability', verifyJWT,SpaceController.availability);
 
 routes.post('/spaces', verifyJWT, celebrate({
     [Segments.BODY]: Joi.object().keys({
