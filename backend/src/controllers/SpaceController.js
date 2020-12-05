@@ -1,7 +1,6 @@
 const generateUniqueId = require("../utils/generateUniqueId");
 const connection = require("../database/connection");
 const availabilityCheck = require("../utils/availabilityCheck");
-
 module.exports = {
   async index(request, response) {
     const spaces = await connection("spaces").select("*");
@@ -11,9 +10,7 @@ module.exports = {
 
   async show(request, response) {
     const { id } = request.params;
-
     const space = await connection("spaces").select("*").where("id", id);
-
     return response.json(space);
   },
 

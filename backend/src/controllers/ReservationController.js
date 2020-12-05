@@ -1,6 +1,7 @@
 const generateUniqueId = require('../utils/generateUniqueId');
 const availabilityCheck = require('../utils/availabilityCheck');
 const connection = require('../database/connection');
+const dao = require('../utils/daoLogs');
 
 module.exports = {
   async index(request, response) {
@@ -83,7 +84,7 @@ module.exports = {
         canceled,
         spaceId
       });
-    
+      dao.teste();
       return response.json({ 
         id, 
         normal,
