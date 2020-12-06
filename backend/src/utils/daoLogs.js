@@ -1,25 +1,15 @@
 const fs = require('fs');
+
 function saveLog(content) {
-    var fullPath = `${new Date().toISOString().substr(0, 10)}.txt`;
+    let path = '/home/TADS/Projects/spaces-scheduling/backend/src/files/temp.txt'
+    // let path = fs.realpathSync('temp.txt', []);
+    let when = new Date().toISOString().substr(0, 19);
+    let finalContent = `\n${when} | ${content}`;
 
-    fs.writeFile(fullPath, content, function (err) {
-        if (err) return console.log(err);
-        console.log('saving content in file > example.txt');
-    });
+    //writing new line of log in temp.txt file
+    fs.appendFile(path, finalContent, function (err) {
+        if (err) throw err;
+        console.log('new line added');
+      });  
 }
-
-function teste() {
-    // console.log("teste")
-    // fs.writeFile('mynewfile3.txt', 'This is my text new', function (err) {
-    //     if (err) throw err;
-    //     console.log('Replaced!');
-    // });
-    var data = "New File Contents";
-
-    fs.writeFile("temp.txt", data, (err) => {
-        if (err) console.log(err);
-        console.log("Successfully Written to File.");
-    });
-}
-
-module.exports = { saveLog, teste }
+module.exports = { saveLog }

@@ -11,7 +11,7 @@ module.exports = {
   },
 
   async show(request, response) {
-    const {id} = request.params;
+    const { id } = request.params;
 
     const reserve = await connection('reservations').select('*').where('id', id);
 
@@ -19,26 +19,26 @@ module.exports = {
   },
 
   async reservationCancel(request, response) {
-    const {id} = request.params;
+    const { id } = request.params;
 
     const reservation = await connection('reservations')
       .select('id')
       .where('id', id)
       .then(([row]) => {
         if (!row) {
-        return response.status(400).send("do not exist")
-      }
-      return connection('reservations')
-        .update('canceled', 1)
-        .where('id', row.id)
-    });
+          return response.status(400).send("do not exist")
+        }
+        return connection('reservations')
+          .update('canceled', 1)
+          .where('id', row.id)
+      });
     return response.status(200).send("Reservation caceled");
   },
 
   async reservationsBySpace(request, response) {
     const { spaceId } = request.query;
 
-    const reservations = await connection('reservations').select('*').where({'spaceId': spaceId, 'canceled': 0});
+    const reservations = await connection('reservations').select('*').where({ 'spaceId': spaceId, 'canceled': 0 });
 
     return response.json(reservations);
   },
@@ -58,24 +58,24 @@ module.exports = {
 
     //validate space
     const space = await connection('spaces').select('*').where('id', spaceId);
-    if(space.length==0)
+    if (space.length == 0)
       return response.status(400).send('Bad request! Space does not exist!');
-    
-    if(normal){
+
+    if (normal) {
       dataEnd = dateStart;
-    }else{
+    } else {
       var data1 = new Date(dateStart);
       var data2 = new Date(dateEnd);
-      if(data1>=data2)
+      if (data1 >= data2)
         return response.status(400).send('Bad request! The end date of the recurring reservation must be after the start date!');
     }
     //get reservations for a space
-    const reservations = await connection('reservations').select('*').where({'spaceId': spaceId, 'canceled': 0});
+    const reservations = await connection('reservations').select('*').where({ 'spaceId': spaceId, 'canceled': 0 });
     //check if the date and time are available for a given space
-    const available=availabilityCheck(normal,dateStart,dateEnd,schedule,reservations);
-    if(available){
+    const available = availabilityCheck(normal, dateStart, dateEnd, schedule, reservations);
+    if (available) {
       await connection('reservations').insert({
-        id, 
+        id,
         normal,
         dateStart,
         dateEnd,
@@ -84,16 +84,17 @@ module.exports = {
         canceled,
         spaceId
       });
-      dao.teste();
-      return response.json({ 
-        id, 
+      let content = JSON.stringify(request.body);
+      dao.saveLog(content);
+      return response.json({
+        id,
         normal,
         dateStart,
         dateEnd,
         justification,
         schedule,
         canceled,
-        spaceId 
+        spaceId
       });
     }
 
