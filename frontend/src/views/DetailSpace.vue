@@ -89,7 +89,9 @@
         </v-list>
         <v-card-actions>
           <v-row align="center" justify="end">
-            <v-btn outlined rounded text dark color="blue">
+            <v-btn outlined rounded text dark color="blue"
+              @click="sendToEdit('edit-space', space)"
+            >
               <v-icon left> mdi-pencil </v-icon>
               Editar
             </v-btn>
@@ -113,8 +115,13 @@ export default {
     SpaceReservations,
     Calendar,
   },
-  async created() {
+  created() {
     this.$store.commit("setTitle", "Espaço");
   },
+  methods: {
+    sendToEdit(where, data) {
+      this.$router.push({ name: where, params: {space: data} });
+    }
+  }
 };
 </script>

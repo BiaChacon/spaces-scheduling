@@ -8,6 +8,7 @@ import ReservationList from '../views/ReservationList.vue';
 import ReservationNormal from '../views/RegisterReservationNormal.vue';
 import ReservationRecurring from '../views/RegisterReservationRecurring.vue';
 import DetailReserve from '../views/DetailReserve.vue';
+import EditSpace from '../views/EditSpace.vue';
 import Login from '../views/Login.vue';
 import beforeEach from './beforeEach'
 
@@ -53,6 +54,11 @@ const routes = [
     path: '/cadastrar-espaco',
     name: 'register-space',
     component: RegisterSpace,
+  },
+  {
+    path: '/editar-espaco',
+    name: 'edit-space',
+    component: EditSpace,
   },
   {
     path: '/listar-reservas',
