@@ -6,7 +6,8 @@
           <router-view></router-view>
         </v-container>
       </v-main>
-      <!-- <Footer></Footer> -->
+      <v-divider style="margin: 0"></v-divider>
+      <Footer></Footer>
     </v-app>
   </div>
   <div v-else>
@@ -17,18 +18,19 @@
           <router-view></router-view>
         </v-container>
       </v-main>
-      <!-- <Footer></Footer> -->
     </v-app>
   </div>
 </template>
 
 <script>
 import AppNavbar from "./components/AppNavbar";
+import Footer from "./components/Footer";
 
 export default {
   name: "App",
   components: {
     AppNavbar,
+    Footer,
   },
   data: () => ({
     drawer: false,
