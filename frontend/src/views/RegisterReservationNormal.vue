@@ -160,7 +160,10 @@ export default {
         spaceId: this.selectIds[this.selectLabels.indexOf(this.selected)],
       };
 
-      await api.create(this.newReserve);
+      await api.create(this.newReserve).catch(
+        this.$alert("Espaço selecionado já tem reserva no horário escolhido.", "Erro", 'error')
+      );
+
       this.$alert("Reserva Cadastrada.", "Sucesso", 'success');
       this.clear();
       this.$router.push("/");
