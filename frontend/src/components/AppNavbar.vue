@@ -25,14 +25,7 @@
     >
       <v-list nav dense>
         <v-list-item>
-          <!-- <v-list-item-avatar>
-            <v-img src="../../public/favicon.ico"></v-img>
-          </v-list-item-avatar> -->
-          <v-list-item-content>
-            <v-list-item-title>
-              <strong>Agendamento de Salas</strong>
-            </v-list-item-title>
-          </v-list-item-content>
+          <v-img src="../assets/logo.svg"></v-img>
         </v-list-item>
         <v-divider></v-divider>
 
