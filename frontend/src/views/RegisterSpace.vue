@@ -1,11 +1,11 @@
 <template>
-  <v-card class="mx-auto" max-width="500">
+  <v-card class="mx-auto" max-width="500" style="margin-top: 20px">
     <v-card-text>
-      <v-form class="m-3" style="margin: 30px" v-model="isValid">
+      <v-form class="m-3" v-model="isValid">
         <v-text-field
           v-model="form.name"
           label="Nome"
-          :rules="[(v) => !!v || 'is required']"
+          :rules="[(v) => !!v || 'Nome é de preenchimento obrigatório']"
           required
           outlined
         ></v-text-field>
@@ -13,7 +13,7 @@
         <v-textarea
           v-model="form.description"
           label="Descrição"
-          :rules="[(v) => !!v || 'is required']"
+          :rules="[(v) => !!v || 'Descrição é de preenchimento obrigatório']"
           required
           auto-grow
           outlined
@@ -24,7 +24,7 @@
         <v-text-field
           v-model="form.localization"
           label="Localização"
-          :rules="[(v) => !!v || 'is required']"
+          :rules="[(v) => !!v || 'Localização é de preenchimento obrigatório']"
           required
           outlined
         ></v-text-field>
@@ -32,7 +32,7 @@
         <v-text-field
           v-model="form.responsible"
           label="Responsável"
-          :rules="[(v) => !!v || 'is required']"
+          :rules="[(v) => !!v || 'Responsável é de preenchimento obrigatório']"
           required
           outlined
         ></v-text-field>
@@ -42,7 +42,8 @@
           :items="options"
           item-text="label"
           item-value="value"
-          label="Espaço especial"
+          label="Espaço Especial"
+          :rules="[(v) => !!v || 'Espaço especial é de preenchimento obrigatório']"
           required
           outlined
           @change="$v.select.$touch()"
@@ -52,7 +53,7 @@
         <v-textarea
           v-model="form.justification"
           label="Justificativa"
-          :rules="[(v) => !!v || 'is required']"
+          :rules="[(v) => !!v || 'Justificativa é de preenchimento obrigatório']"
           required
           auto-grow
           outlined
@@ -66,7 +67,7 @@
           item-text="label"
           item-value="value"
           label="Computadores"
-          :rules="[(v) => !!v || 'is required']"
+          :rules="[(v) => !!v || 'Computadores é de preenchimento obrigatório']"
           required
           outlined
           @change="$v.select.$touch()"
@@ -76,6 +77,7 @@
         <v-text-field
           v-model="form.qtdPeople"
           label="Capacidade"
+          :rules="[(v) => !!v || 'Capacidade é de preenchimento obrigatório']"
           required
           type="number"
           outlined
@@ -84,24 +86,26 @@
         <v-text-field
           v-model="form.extension"
           label="Ramal"
-          :rules="[(v) => !!v || 'is required']"
+          :rules="[(v) => !!v || 'Ramal é de preenchimento obrigatório']"
           required
           type="number"
           outlined
         ></v-text-field>
+
+        <v-card-actions class="justify-center">
+          <v-btn
+            :disabled="!isValid"
+            style="width: 250px"
+            large
+            rounded
+            dark
+            color="success"
+            @click.prevent="submit"
+          >
+            Cadastrar
+          </v-btn>
+        </v-card-actions>
       </v-form>
-      <v-card-actions class="justify-center">
-        <v-btn
-          :disabled="!isValid"
-          style="width: 250px"
-          large
-          rounded
-          dark
-          color="success"
-          @click.prevent="submit"
-          >Cadastrar</v-btn
-        >
-      </v-card-actions>
     </v-card-text>
   </v-card>
 </template>
