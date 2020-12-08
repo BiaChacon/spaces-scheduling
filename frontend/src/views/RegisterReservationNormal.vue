@@ -1,12 +1,12 @@
 <template>
-  <v-card class="mx-auto" max-width="500">
+  <v-card class="mx-auto" max-width="500" style="margin-top: 20px">
     <v-card-text>
-      <v-form class="m-3" style="margin: 30px" v-model="isValid">
+      <v-form class="m-3" v-model="isValid">
         <v-select
           v-model="selected"
           :items="selectLabels"
           label="Espaços"
-          :rules="[(v) => !!v || 'is required']"
+          :rules="[(v) => !!v || 'Espaço é de preenchimento obrigatório']"
           required
           outlined
           @change="$v.select.$touch()"
@@ -20,7 +20,7 @@
           rows="3"
           row-height="25"
           v-model="justification"
-          :rules="[(v) => !!v || 'is required']"
+          :rules="[(v) => !!v || 'Justificativa é de preenchimento obrigatório']"
           required
         ></v-textarea>
 
@@ -38,7 +38,7 @@
             <v-text-field
               v-mask="'##/##/####'"
               v-model="dateFormatted"
-              :rules="[(v) => !!v || 'is required']"
+              :rules="[(v) => !!v || 'Data é de preenchimento obrigatório']"
               required
               label="Data"
               outlined
@@ -60,25 +60,27 @@
           item-text="label"
           item-value="value"
           required
-          :rules="[(v) => !!v || 'is required']"
+          :rules="[v => v.length>0 || 'Horário é de preenchimento obrigatório']"
           chips
           label="Horário"
           multiple
           outlined
         ></v-select>
+
+        <v-card-actions class="justify-center">
+          <v-btn
+            :disabled="!isValid"
+            style="width: 250px"
+            large
+            rounded
+            dark
+            color="success"
+            @click.prevent="submit"
+          >
+            Cadastrar
+          </v-btn>
+        </v-card-actions>
       </v-form>
-      <v-card-actions class="justify-center">
-        <v-btn
-          :disabled="!isValid"
-          style="width: 250px"
-          large
-          rounded
-          dark
-          color="success"
-          @click.prevent="submit"
-          >Cadastrar</v-btn
-        >
-      </v-card-actions>
     </v-card-text>
   </v-card>
 </template>
@@ -121,18 +123,6 @@ export default {
   computed: {
     computedDateFormatted() {
       return this.formatDate(this.date);
-    },
-    numberErrors() {
-      const errors = [];
-      if (!this.$v.number.$dirty) return errors;
-      !this.$v.number.required && errors.push("Numero é obrigatorio");
-      return errors;
-    },
-    selectErrors() {
-      const errors = [];
-      if (!this.$v.select.$dirty) return errors;
-      !this.$v.select.required && errors.push("Tipo de serviço é obrigatorio");
-      return errors;
     },
   },
   watch: {
