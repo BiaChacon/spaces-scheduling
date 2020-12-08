@@ -42,7 +42,6 @@
               required
               label="Data Início"
               outlined
-              hint="DD/MM/AAAA"
               v-on="on"
             ></v-text-field>
           </template>
@@ -71,7 +70,6 @@
               required
               label="Data Fim"
               outlined
-              hint="DD/MM/AAAA"
               v-on="on"
             ></v-text-field>
           </template>
@@ -162,8 +160,8 @@ export default {
     number: "",
     justification: "",
     selected: null,
-    dateStart: new Date().toISOString().substr(0, 10),
-    dateEnd: new Date().toISOString().substr(0, 10),
+    dateStart: "",
+    dateEnd: "",
     selectLabels: [],
     selectIds: [],
     newReserve: {},
@@ -214,14 +212,24 @@ export default {
         spaceId: this.selectIds[this.selectLabels.indexOf(this.selected)],
       };
 
-      await api.create(this.newReserve)
-        .catch(
-          this.$alert("Espaço selecionado já tem reserva no horário escolhido.", "Erro", 'error')
-        );
+      var data1 = new Date(this.newReserve.dateStart);
+      var data2 = new Date(this.newReserve.dateEnd);
+      var data = new Date().getDate();
 
-      this.$alert("Reserva Cadastrada.", "Sucesso", 'success');
-      this.clear();
-      this.$router.push("/");
+      if(data1 >= data2) {
+        this.$alert("A data de término da reserva recorrente deve ser posterior à data de início.", "Erro", 'error');
+      }else if(data1 < data){
+        this.$alert("A data de início da reserva deve ser posterior ou igual à data de hoje.", "Erro", 'error');
+      }else{
+        await api.create(this.newReserve)
+          .catch(
+            this.$alert("Espaço selecionado já tem reserva no horário escolhido.", "Erro", 'error')
+          );
+        this.$alert("Reserva Cadastrada.", "Sucesso", 'success');
+        this.clear();
+        this.$router.push("/");  
+      }
+
     },
     clear() {
       this.justification = "";

@@ -42,7 +42,6 @@
               required
               label="Data"
               outlined
-              hint="DD/MM/AAAA"
               @blur="date = parseDate(dateFormatted)"
               v-on="on"
             ></v-text-field>
@@ -113,7 +112,6 @@ export default {
     justification: "",
     selected: null,
     date: new Date().toISOString().substr(0, 10),
-    // dateFormatted: this.formatDate(new Date().toISOString().substr(0, 10)),
     selectLabels: [],
     selectIds: [],
     newReserve: {},
@@ -160,13 +158,22 @@ export default {
         spaceId: this.selectIds[this.selectLabels.indexOf(this.selected)],
       };
 
-      await api.create(this.newReserve).catch(
-        this.$alert("Espaço selecionado já tem reserva no horário escolhido.", "Erro", 'error')
-      );
+      var data1 = new Date(this.newReserve.dateStart);
+      var d = new Date().toDateString();
+      var data2 = new Date(d);
 
-      this.$alert("Reserva Cadastrada.", "Sucesso", 'success');
-      this.clear();
-      this.$router.push("/");
+      if(data1 < data2){
+        this.$alert("A data da reserva deve ser posterior ou igual à data de hoje.", "Erro", 'error');
+      }else{
+        await api.create(this.newReserve).catch(
+          this.$alert("Espaço selecionado já tem reserva no horário escolhido.", "Erro", 'error')
+        );
+
+        this.$alert("Reserva Cadastrada.", "Sucesso", 'success');
+        this.clear();
+        this.$router.push("/");
+      }
+
     },
     clear() {
       this.justification = "";
