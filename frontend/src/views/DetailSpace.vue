@@ -99,9 +99,38 @@
         </v-card-actions>
       </v-card-text>
     </v-card>
+
     <Calendar :space_id="space.id" />
-    <space></space>
-    <SpaceReservations :space_id="space.id" />
+
+    <div v-if="show" style="margin-top: 30px">
+      <SpaceReservations :space_id="space.id" />
+      <v-row align="center" justify="center" style="margin-top: 30px">
+        <v-btn
+          @click="mostrar()"
+          rounded
+          small
+          dark
+          color="blue"
+        >
+          <v-icon left> mdi-minus </v-icon>
+          ocultar lista de reservas do espaço
+        </v-btn>
+      </v-row>
+    </div>
+    <div v-else style="margin-top: 30px">
+      <v-row align="center" justify="center">
+          <v-btn
+            @click="mostrar()"
+            rounded
+            small
+            dark
+            color="blue"
+          >
+            <v-icon left> mdi-plus </v-icon>
+            mostrar lista de reservas do espaço
+        </v-btn>
+      </v-row>
+    </div>
   </div>
 </template>
 
@@ -111,6 +140,9 @@ import Calendar from "../views/Calendar.vue";
 
 export default {
   props: ["space"],
+  data: () => ({
+    show: false,
+  }),
   components: {
     SpaceReservations,
     Calendar,
@@ -121,6 +153,9 @@ export default {
   methods: {
     sendToEdit(where, data) {
       this.$router.push({ name: where, params: {space: data} });
+    },
+    mostrar(){
+      this.show = !this.show;
     }
   }
 };
