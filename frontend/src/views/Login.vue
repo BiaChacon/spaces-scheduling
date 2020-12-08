@@ -1,15 +1,13 @@
 <template>
-  <v-row justify="center" class="text-center" style="margin-top: 200px">
+  <v-row justify="center" class="text-center" style="margin-top: 100px">
     <v-col cols="12" sm="10" md="8" lg="5">
       <v-card ref="form" elevation="2" outlined>
-        <v-card-title
-          style="color: #0091ea; font-weight: bold; font-size: 20px"
-        >
-          AUTENTICAÇÃO INTEGRADA
+        <v-card-title>
+          <v-img src="../assets/login.svg"></v-img>
         </v-card-title>
 
         <div v-if="!valid">
-          <v-alert color="red" dense outlined> Credenciais inválidas. </v-alert>
+          <v-alert color="red" dense outlined>Credenciais inválidas.</v-alert>
         </div>
 
         <v-card-text>
@@ -35,7 +33,7 @@
               rounded
               dark
               color="blue"
-              style="width: 200px"
+              style="width: 200px; margin-bottom: 40px"
             >
               Entrar
             </v-btn>
@@ -58,7 +56,7 @@ export default {
       this.$store
         .dispatch("login", this.form)
         .then(() => this.$router.push("/"))
-        .catch((err) => console.log(err), this.valid=false);
+        .catch(() => this.valid=false);
     },
   },
 };
