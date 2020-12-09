@@ -1,0 +1,2 @@
+
+2020-12-09T19:01:03 | {"normal":false,"dateStart":"2021-05-07","dateEnd":"2021-06-10","justification":"aaa","schedule":"3;3,4","canceled":false,"spaceId":"de024542"}
