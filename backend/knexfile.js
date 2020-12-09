@@ -13,17 +13,14 @@ module.exports = {
     // useNullAsDefault: true,
     client: 'postgresql',
     connection: {
-      host: 'db',
-      user: 'postgres',
-      password: 'postgres'
+      host: process.env.DB_HOST,
+      user: process.env.DB_USER,
+      password: process.env.DB_PASS
     },
     pool: {
       min: 2,
       max: 10
     },
-    // migrations: {
-    //   tableName: 'knex_migrations'
-    // }
     migrations:{
       directory: __dirname + '/src/database/migrations',
     }
