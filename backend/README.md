@@ -2,18 +2,20 @@
 
 ## Project setup
 ```
-npm install
+docker-compose up --build
 ```
 
-## Run the migration
+## Run the seeds
 ```
-npx knex migrate:latest
+docker exec api-server npx knex seed:run
 ```
+
 ## Compiles for run the serve
 ```
-npm start
+docker-compose up
 ```
+
 ## Compiles for run the tests
 ```
-npm test
+docker exec api-server npm test
 ```
