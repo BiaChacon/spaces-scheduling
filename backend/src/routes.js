@@ -10,7 +10,7 @@ const UserController = require('./controllers/UserController');
 const routes = express.Router();
 
 routes.post('/login', UserController.login);
-routes.post('/register-user', verifyJWT, UserController.create);
+routes.post('/register-user', UserController.create);
 routes.post('/logout', verifyJWT, UserController.logout);
 routes.get('/profile/:id', verifyJWT, UserController.profile);
 
