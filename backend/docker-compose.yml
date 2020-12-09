@@ -9,16 +9,18 @@ services:
       - 3333:3333
     volumes: 
       - .:usr/app
-      links: 
-        - db
-      environment: 
-        DB_HOST: host.docker.internal
-        DB_USER: postgres
-        DB_PASS: postgres
+    links: 
+      - db
+    depends_on: 
+      - db
+    environment: 
+      DB_HOST: host.docker.internal
+      DB_USER: postgres
+      DB_PASS: postgres
   db:
     image: postgres:alpine 
     container_name: api-db
     ports: 
-      - "5432":"5432"
+      - "5432:5432"
     environment: 
-      POSTGRES_PASSWORD="postgres"
+      - POSTGRES_PASSWORD=postgres
