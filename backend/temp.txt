@@ -1,3 +1,0 @@
-New File Contents
-2020-12-06T00:06:22 | {"normal":true,"dateStart":"2020-12-15","dateEnd":"2020-12-15","justification":"aa","schedule":"1;4","canceled":false,"spaceId":"6ca1ffe6"}
-2020-12-06T00 | {"normal":true,"dateStart":"2020-12-07","dateEnd":"2020-12-07","justification":"aa","schedule":"0;4","canceled":false,"spaceId":"6ca1ffe6"}
