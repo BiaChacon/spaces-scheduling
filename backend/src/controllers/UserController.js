@@ -44,6 +44,10 @@ module.exports = {
       password
     } = request.body;
 
+    if(password == undefined || password.length < 8 || password == '') {
+      return response.status(400).send("Passoword invalid");
+    }
+
     const id = generateUniqueId();
     await connection('users').insert({
       id,
