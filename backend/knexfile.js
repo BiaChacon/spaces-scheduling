@@ -3,14 +3,30 @@
 module.exports = {
 
   development: {
-    client: 'sqlite3',
+    // client: 'sqlite3',
+    // connection: {
+    //   filename: './src/database/db.sqlite'
+    // },
+    // migrations: {
+    //   directory: './src/database/migrations'
+    // },
+    // useNullAsDefault: true,
+    client: 'postgresql',
     connection: {
-      filename: './src/database/db.sqlite'
+      host: 'db',
+      user: 'postgres',
+      password: 'postgres'
     },
-    migrations: {
-      directory: './src/database/migrations'
+    pool: {
+      min: 2,
+      max: 10
     },
-    useNullAsDefault: true,
+    // migrations: {
+    //   tableName: 'knex_migrations'
+    // }
+    migrations:{
+      directory: __dirname + '/src/database/migrations',
+    }
   },
 
   test: {
@@ -28,7 +44,7 @@ module.exports = {
     client: 'postgresql',
     connection: {
       database: 'my_db',
-      user:     'username',
+      user: 'username',
       password: 'password'
     },
     pool: {
@@ -44,7 +60,7 @@ module.exports = {
     client: 'postgresql',
     connection: {
       database: 'my_db',
-      user:     'username',
+      user: 'username',
       password: 'password'
     },
     pool: {
