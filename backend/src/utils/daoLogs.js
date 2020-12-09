@@ -1,7 +1,10 @@
 const fs = require('fs');
 
 function saveLog(content) {
-    let path = __dirname + '/src/files/temp.txt'
+    /* path witout docker
+    let path = '/home/TADS/Projects/spaces-scheduling/backend/src/files/temp.txt' */
+    let path = '/usr/app/src/files/temp.txt'
+
     // let path = fs.realpathSync('temp.txt', []);
     let when = new Date().toISOString().substr(0, 19);
     let finalContent = `\n${when} | ${content}`;

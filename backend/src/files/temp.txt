@@ -1,3 +1,4 @@
 
 2020-12-06T00:12:22 | {"normal":true,"dateStart":"2020-12-01","dateEnd":"2020-12-01","justification":"reserva para aula de taniro","schedule":"1;2,3,4","canceled":false,"spaceId":"6ca1ffe6"}
 2020-12-08T23:16:33 | {"normal":false,"dateStart":"2020-12-04","dateEnd":"2020-12-16","justification":"fulano massa","schedule":"0;1,2,3","canceled":false,"spaceId":"6189805a"}
+2020-12-09T01:48:37 | {"normal":true,"dateStart":"2020-12-16","dateEnd":"2020-12-16","justification":"a","schedule":"2;11","canceled":false,"spaceId":"e2a77355"}
