@@ -4,7 +4,7 @@ services:
   api-server: 
     build: .
     container_name: api-server
-    command: sh -c "npx knex migrate:latest && npm start"
+    command: sh -c "npx knex migrate:latest && npx knex seed:run && npm start"
     ports: 
       - 3333:3333
     volumes: 

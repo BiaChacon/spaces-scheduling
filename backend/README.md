@@ -2,12 +2,10 @@
 
 ## Project setup
 ```
+npm install
+```
+```
 docker-compose up --build
-```
-
-## Run the seeds
-```
-docker exec api-server npx knex seed:run
 ```
 
 ## Compiles for run the serve
