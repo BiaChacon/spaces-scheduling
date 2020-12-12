@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 export const http = axios.create({
-  baseURL: 'http://localhost:3333/',
+  baseURL: 'https://spaces-scheduling.herokuapp.com/',
 });
 
 export default http;
