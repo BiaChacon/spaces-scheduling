@@ -228,6 +228,9 @@ export default {
 
       this.spaces = [];
       this.spaces = response.data;
+      if(this.spaces.length === 0){
+        alert("nao possui espaços disponiveis nestas condições")
+      }
     },
   },
 };
