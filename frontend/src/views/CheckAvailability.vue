@@ -144,6 +144,7 @@
         </v-col>
       </v-row>
     </v-container>
+    
   </div>
 </template>
 
@@ -217,19 +218,19 @@ export default {
         hours += `${state},`;
       });
       hours = hours.substring(0, hours.length - 1);
-      
+
       const params = new URLSearchParams({
         computers: this.checkComputers,
         date: this.date,
         hours: hours,
       }).toString();
-      
+
       const response = await api.getListWithParams(params);
 
       this.spaces = [];
       this.spaces = response.data;
-      if(this.spaces.length === 0){
-        alert("nao possui espaços disponiveis nestas condições")
+      if (this.spaces.length === 0) {
+        this.$alert("Não possui espaços disponíveis nestas condições", "Erro", 'error')
       }
     },
   },
