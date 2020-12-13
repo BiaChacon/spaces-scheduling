@@ -20,7 +20,6 @@
                   v-model="dateFormatted"
                   label="Data"
                   outlined
-                  hint="DD/MM/AAAA"
                   v-on="on"
                 ></v-text-field>
               </template>
@@ -76,6 +75,14 @@
 
         <v-col>
           <v-card width="1400px" class="mx-auto">
+            <div v-if="status.length > 0">
+              <v-card-title
+                disabled="true"
+                class="pl-11"
+                style="color: grey; font-weight: bold; font-size: 20px"
+                v-text="status"
+              ></v-card-title>
+            </div>
             <template v-for="(space, index) in spaces">
               <v-card-title
                 v-text="space.name"
@@ -176,6 +183,7 @@ export default {
     checkComputers: "",
     checkSchedular: "",
     menu1: false,
+    status: "",
   }),
   computed: {
     computedDateFormatted() {
@@ -210,8 +218,12 @@ export default {
       this.checkComputers = "";
       this.checkSchedular = "";
       this.spaces = [];
+      this.status = "";
     },
     async check() {
+      if(this.checkSchedular === ""|| this.checkComputers === "" || this.date === "")
+        this.$alert("Para realizar a checagem todos os campos devem ser preenchidos.", "Erro", 'error');
+
       let hours = "";
       this.checkSchedular.sort();
       this.checkSchedular.map((state) => {
@@ -230,7 +242,7 @@ export default {
       this.spaces = [];
       this.spaces = response.data;
       if (this.spaces.length === 0) {
-        this.$alert("Não possui espaços disponíveis nestas condições", "Erro", 'error')
+        this.status = "Não possui espaços disponíveis nestas condições";
       }
     },
   },
