@@ -9,7 +9,7 @@
   </p>
 </h1>
  <p align="center">
-  <strong align="center">Application to ...</strong>
+  <strong align="center">Application to manage the spaces of the computer sector of EAJ.</strong>
 </p>
 <p align="center">
   <strong align="center">Backend  |  Frontend</strong>
@@ -28,13 +28,26 @@ About application.
 
 ### 🌐 Backend
 Technologies used in the [backend](https://github.com/BiaChacon/spaces-scheduling/tree/master/backend):
-- ;
-- .
+- celebrate;
+- cors;
+- dotenv-safe;
+- express;
+- jsonwebtoken;
+- knex;
+- morgan;
+- pg;
+- sqlite.
 
 ### 💻 Frontend
 Technologies used in the [frontend](https://github.com/BiaChacon/spaces-scheduling/tree/master/frontend):
-- ;
-- .
+- vue;
+- vou-router;
+- vuex;
+- vuetify;
+- axios;
+- vue-simple-alert;
+- rrule;
+- v-mask.
 
 <!-- <p align="center">
 <img src="" float="center"/>
