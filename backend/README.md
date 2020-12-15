@@ -13,7 +13,7 @@ curl -fsSL https://get.docker.com -o get-docker.sh
 sh get-docker.sh
 ```
 
-## Project setup
+## Project setup and compilation
 ```console
 npm install
 ```
@@ -23,12 +23,12 @@ npm install
 docker-compose up --build
 ```
 
-## Compiles for run the serve
+### Running the API and the database with the docker-compose
 ```console
 docker-compose up
 ```
 
-## Compiles for run the tests
+### Running the tests
 ```console
 docker exec api-server npm test
 ```
