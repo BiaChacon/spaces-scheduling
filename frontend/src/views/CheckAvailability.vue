@@ -243,6 +243,8 @@ export default {
       this.spaces = response.data;
       if (this.spaces.length === 0) {
         this.status = "Não possui espaços disponíveis nestas condições";
+      }else{
+        this.status = "";
       }
     },
   },
